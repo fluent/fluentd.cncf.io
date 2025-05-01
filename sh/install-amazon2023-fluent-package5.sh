@@ -11,18 +11,18 @@ sudo -k
 sudo sh <<SCRIPT
 
   # add GPG key
-  rpm --import https://packages.treasuredata.com/GPG-KEY-td-agent
-  rpm --import https://packages.treasuredata.com/GPG-KEY-fluent-package
+  rpm --import https://fluentd.cdn.cncf.io/GPG-KEY-td-agent
+  rpm --import https://fluentd.cdn.cncf.io/GPG-KEY-fluent-package
 
   # add fluent package repository to yum
   cat >/etc/yum.repos.d/fluent-package.repo <<'EOF';
 [fluent-package]
 name=Fluentd Project
-baseurl=https://packages.treasuredata.com/5/amazon/2023/\$basearch
+baseurl=https://fluentd.cdn.cncf.io/5/amazon/2023/\$basearch
 enabled=1
 gpgcheck=1
-gpgkey=https://packages.treasuredata.com/GPG-KEY-td-agent
-       https://packages.treasuredata.com/GPG-KEY-fluent-package
+gpgkey=https://fluentd.cdn.cncf.io/GPG-KEY-td-agent
+       https://fluentd.cdn.cncf.io/GPG-KEY-fluent-package
 EOF
 
   # update your sources
