@@ -13,7 +13,7 @@ end
 # script which was hosted on https://toolbelt.treasuredata.com/ previously.
 #
 # Use case 1: backup install scripts from https://toolbelt.treasuredata.com.
-# $ ruby make-install-script.rb --debug --channel 1,2,2.5,3,4,5 --backup PATH_TO_REPOSITORY
+# $ ruby make-install-script.rb --debug --channel 1,2,2.5,3,4,5,6 --backup PATH_TO_REPOSITORY
 #
 # Use case 2: generate install scripts for packages.treasuredata.com.
 # $ ruby make-install-script.rb --debug --site https://packages.treasuredata.com --channel 5 --verify PATH_TO_REPOSITORY
@@ -66,6 +66,8 @@ class FluentInstallScript
   def setup_metadata
     @options[:channel].each do |channel|
       case channel
+      when "6"
+        @metadata.merge!(generate_6x_metadata)
       when "5"
         @metadata.merge!(generate_5x_metadata)
       when "4"
@@ -153,6 +155,59 @@ class FluentInstallScript
     end
   end
   
+  def generate_6x_metadata
+    metadata = {}
+    puts "Processing fluent-package 6 ..." if @options[:debug]
+    template = {
+      channel_version: 6,
+      package_name: @package_name,
+      base_url: @base_url
+    }
+    rhel_template = template.merge({
+                                     channel_version: 6,
+                                     distribution: 'redhat',
+                                     repo_label: @package_name,
+                                     repo_file: @repo_file,
+                                     repo_name: 'Fluentd Project',
+                                   })
+    rhel_lts_template = rhel_template.merge({
+                                              repo_file: @lts_repo_file,
+                                              repo_label: "#{@package_name}-lts",
+                                              lts: true
+                                            })
+    debian_template = template.merge({
+                                       distribution: 'debian',
+                                       apt_source_deb: 'fluent-apt-source/fluent-apt-source_2025.7.29-1_all.deb',
+                                       apt: 'apt'
+                                     })
+    ubuntu_template = debian_template.merge({
+                                              distribution: 'ubuntu',
+                                              apt_source_deb: 'fluent-apt-source/fluent-apt-source_2025.7.29-1_all.deb'
+                                            })
+    debian_lts_template = debian_template.merge({
+                                                  apt_source_deb: 'fluent-lts-apt-source/fluent-lts-apt-source_2025.7.29-1_all.deb',
+                                                  lts: true
+                                                })
+    ubuntu_lts_template = ubuntu_template.merge({
+                                                  apt_source_deb: 'fluent-lts-apt-source/fluent-lts-apt-source_2025.7.29-1_all.deb',
+                                                  lts: true
+                                                })
+    metadata.merge!({
+                      install_redhat_fluent_package6: rhel_template,
+                      install_amazon2023_fluent_package6: rhel_template.merge({distribution: 'amazon', version: 2023}),
+                      install_ubuntu_noble_fluent_package6: ubuntu_template.merge({version: 'noble'}),
+                      install_ubuntu_jammy_fluent_package6: ubuntu_template.merge({version: 'jammy'}),
+                      install_debian_bookworm_fluent_package6: debian_template.merge({version: 'bookworm'}),
+                      install_debian_trixie_fluent_package6: debian_template.merge({version: 'trixie'}),
+                      install_redhat_fluent_package6_lts: rhel_lts_template,
+                      install_amazon2023_fluent_package6_lts: rhel_lts_template.merge({distribution: 'amazon', version: 2023}),
+                      install_ubuntu_noble_fluent_package6_lts: ubuntu_lts_template.merge({version: 'noble'}),
+                      install_ubuntu_jammy_fluent_package6_lts: ubuntu_lts_template.merge({version: 'jammy'}),
+                      install_debian_bookworm_fluent_package6_lts: debian_lts_template.merge({version: 'bookworm'}),
+                      install_debian_trixie_fluent_package6_lts: debian_template.merge({version: 'trixie'}),
+                    })
+  end
+
   def generate_5x_metadata
     metadata = {}
     puts "Processing fluent-package 5 ..." if @options[:debug]
