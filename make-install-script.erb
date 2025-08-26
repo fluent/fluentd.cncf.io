@@ -11,6 +11,18 @@ sudo -k
 # run inside sudo
 sudo sh <<SCRIPT
 
+<% if install_info[:channel_version] >= 6 %>
+  # add fluent-release to access repository
+  distribution=$(cat /etc/system-release-cpe | awk '{print substr($1, index($1, "o"))}' | cut -d: -f2)
+  version=$(cat /etc/system-release-cpe | awk '{print substr($1, index($1, "o"))}' | cut -d: -f4)
+  arch=$(rpm --eval %{_arch})
+<% if install_info[:lts] %>
+  curl -o fluent-release.rpm <%= install_info[:base_url] %>/lts/<%= install_info[:channel_version]%>/redhat/$version/$arch/fluent-lts-release-<%= install_info[:fluent_release_version] %>.el${version}.noarch.rpm
+<% else %>
+  curl -o fluent-release.rpm <%= install_info[:base_url] %>/<%= install_info[:channel_version]%>/redhat/$version/$arch/fluent-release-<%= install_info[:fluent_release_version] %>.el${version}.noarch.rpm
+<% end %>
+  yum install ./fluent-release.rpm
+<% else %>
   # add GPG key
   rpm --import <%= install_info[:base_url] %>/GPG-KEY-td-agent
 <% if install_info[:channel_version] >= 5 %>
@@ -37,6 +49,7 @@ gpgcheck=1
 gpgkey=<%= install_info[:base_url] %>/GPG-KEY-td-agent<% if install_info[:old_sha1] %>-old-sha1<% end%>
 <% if install_info[:channel_version] > 4 %>
        <%= install_info[:base_url] %>/GPG-KEY-fluent-package
+<% end %>
 <% end %>
 EOF
 
@@ -65,6 +78,17 @@ sudo -k
 # run inside sudo
 sudo sh <<SCRIPT
 
+<% if install_info[:channel_version] >= 6 %>
+  # add fluent-release to access repository
+  version=$(cat /etc/system-release-cpe | awk '{print substr($1, index($1, "o"))}' | cut -d: -f4)
+  arch=$(rpm --eval %{_arch})
+<% if install_info[:lts] %>
+  curl -o fluent-release.rpm <%= install_info[:base_url] %>/lts/<%= install_info[:channel_version]%>/amazon/$version/$arch/fluent-lts-release-<%= install_info[:fluent_release_version] %>.amzn${version}.noarch.rpm
+<% else %>
+  curl -o fluent-release.rpm <%= install_info[:base_url] %>/<%= install_info[:channel_version]%>/amazon/$version/$arch/fluent-release-<% install_info[:fluent_release_version] %>.amzn${version}.noarch.rpm
+<% end %>
+  yum install ./fluent-release.rpm
+<% else %>
   # add GPG key
   rpm --import <%= install_info[:base_url] %>/GPG-KEY-td-agent
 <% if install_info[:channel_version] >= 5 %>
@@ -91,6 +115,7 @@ gpgcheck=1
 gpgkey=<%= install_info[:base_url] %>/GPG-KEY-td-agent
 <% if install_info[:channel_version] >= 5 %>
        <%= install_info[:base_url] %>/GPG-KEY-fluent-package
+<% end %>
 <% end %>
 EOF
 
