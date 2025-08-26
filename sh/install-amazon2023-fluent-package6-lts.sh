@@ -10,19 +10,11 @@ sudo -k
 # run inside sudo
 sudo sh <<SCRIPT
 
-  # add GPG key
-  rpm --import https://fluentd.cdn.cncf.io/GPG-KEY-td-agent
-  rpm --import https://fluentd.cdn.cncf.io/GPG-KEY-fluent-package
-
-  # add treasure data repository to yum
-  cat >/etc/yum.repos.d/fluent-package-lts.repo <<'EOF';
-[fluent-package-lts]
-name=Fluentd Project
-baseurl=https://fluentd.cdn.cncf.io/lts/6/amazon/2023/\$basearch
-enabled=1
-gpgcheck=1
-gpgkey=https://fluentd.cdn.cncf.io/GPG-KEY-td-agent
-       https://fluentd.cdn.cncf.io/GPG-KEY-fluent-package
+  # add fluent-release to access repository
+  version=$(cat /etc/system-release-cpe | awk '{print substr($1, index($1, "o"))}' | cut -d: -f4)
+  arch=$(rpm --eval %{_arch})
+  curl -o fluent-release.rpm https://fluentd.cdn.cncf.io/lts/6/amazon/$version/$arch/fluent-lts-release-.amzn${version}.noarch.rpm
+  yum install ./fluent-release.rpm
 EOF
 
   # update your sources
