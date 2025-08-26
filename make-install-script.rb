@@ -13,7 +13,7 @@ end
 # script which was hosted on https://toolbelt.treasuredata.com/ previously.
 #
 # Use case 1: backup install scripts from https://toolbelt.treasuredata.com.
-# $ ruby make-install-script.rb --debug --channel 1,2,2.5,3,4,5,6 --backup PATH_TO_REPOSITORY
+# $ ruby make-install-script.rb --debug --channel 1,2,2.5,3,4,5,6 --backup
 #
 # Use case 2: generate install scripts for packages.treasuredata.com.
 # $ ruby make-install-script.rb --debug --site https://packages.treasuredata.com --channel 5 --verify PATH_TO_REPOSITORY
