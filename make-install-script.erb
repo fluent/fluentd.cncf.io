@@ -148,6 +148,7 @@ sudo sh <<SCRIPT
   # use apt-source package which contains keyring
   curl -o fluent-apt-source.deb <%= install_info[:base_url] %>/<% if install_info[:lts] %>lts/<% end %><%= install_info[:channel_version] %>/<%= install_info[:distribution] %>/<%= install_info[:version] %>/pool/contrib/f/<%= install_info[:apt_source_deb] %>
   apt install -y ./fluent-apt-source.deb
+  rm -f ./fluent-apt-source.deb
 <% elsif install_info[:channel_version] == 4 %>
 <% if install_info[:distribution] == 'ubuntu' and install_info[:version] == 'xenial' %>
   
