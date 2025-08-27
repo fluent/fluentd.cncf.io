@@ -15,6 +15,7 @@ sudo sh <<'SCRIPT'
   arch=$(rpm --eval %{_arch})
   curl -o fluent-release.rpm https://fluentd.cdn.cncf.io/lts/6/amazon/${version}/${arch}/fluent-lts-release-2025.8.29-1.amzn${version}.noarch.rpm
   yum install ./fluent-release.rpm
+  rm -f ./fluent-release.rpm
 
   # update your sources
   yum check-update

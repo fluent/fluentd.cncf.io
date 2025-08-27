@@ -88,6 +88,7 @@ sudo sh <<'SCRIPT'
   curl -o fluent-release.rpm <%= install_info[:base_url] %>/<%= install_info[:channel_version]%>/amazon/${version}/${arch}/fluent-release-<% install_info[:fluent_release_version] %>.amzn${version}.noarch.rpm
 <% end %>
   yum install ./fluent-release.rpm
+  rm -f ./fluent-release.rpm
 <% else %>
   # add GPG key
   rpm --import <%= install_info[:base_url] %>/GPG-KEY-td-agent
