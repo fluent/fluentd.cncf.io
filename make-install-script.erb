@@ -77,7 +77,7 @@ echo "You will be prompted for your password by sudo."
 sudo -k
 
 # run inside sudo
-sudo sh <<SCRIPT
+sudo sh <<'SCRIPT'
 
 <% if install_info[:channel_version] >= 6 %>
   # add fluent-release to access repository
