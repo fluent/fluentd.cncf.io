@@ -8,14 +8,13 @@ echo "You will be prompted for your password by sudo."
 sudo -k
 
 # run inside sudo
-sudo sh <<SCRIPT
+sudo sh <<'SCRIPT'
 
   # add fluent-release to access repository
   version=$(cat /etc/system-release-cpe | awk '{print substr($1, index($1, "o"))}' | cut -d: -f4)
   arch=$(rpm --eval %{_arch})
-  curl -o fluent-release.rpm https://fluentd.cdn.cncf.io/lts/6/amazon/$version/$arch/fluent-lts-release-.amzn${version}.noarch.rpm
+  curl -o fluent-release.rpm https://fluentd.cdn.cncf.io/lts/6/amazon/$version/$arch/fluent-lts-release-2025.8.29-1.amzn${version}.noarch.rpm
   yum install ./fluent-release.rpm
-EOF
 
   # update your sources
   yum check-update

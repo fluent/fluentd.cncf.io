@@ -12,6 +12,7 @@ sudo sh <<SCRIPT
   # use apt-source package which contains keyring
   curl -o fluent-apt-source.deb https://fluentd.cdn.cncf.io/6/debian/bookworm/pool/contrib/f/fluent-apt-source/fluent-apt-source_2025.8.29-1_all.deb
   apt install -y ./fluent-apt-source.deb
+  rm -f ./fluent-apt-source.deb
   # update your sources
   apt update
 
