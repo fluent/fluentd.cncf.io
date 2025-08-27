@@ -169,7 +169,7 @@ class FluentInstallScript
                                      repo_label: @package_name,
                                      repo_file: @repo_file,
                                      repo_name: 'Fluentd Project',
-                                     fluent_relese_version: '2025.8.29-1'
+                                     fluent_release_version: '2025.8.29-1'
                                    })
     rhel_lts_template = rhel_template.merge({
                                               repo_file: @lts_repo_file,
