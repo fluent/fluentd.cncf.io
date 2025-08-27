@@ -223,6 +223,7 @@ class FluentInstallScript
                                      repo_label: @package_name,
                                      repo_file: @repo_file,
                                      repo_name: 'Fluentd Project',
+                                     fluent_release_version: '2025.8.29-1'
                                    })
     rhel_lts_template = rhel_template.merge({
                                               repo_file: @lts_repo_file,
@@ -231,19 +232,19 @@ class FluentInstallScript
                                             })
     debian_template = template.merge({
                                        distribution: 'debian',
-                                       apt_source_deb: 'fluent-apt-source/fluent-apt-source_2025.1.8-1_all.deb',
+                                       apt_source_deb: 'fluent-apt-source/fluent-apt-source_2025.8.29-1_all.deb',
                                        apt: 'apt'
                                      })
     ubuntu_template = debian_template.merge({
                                               distribution: 'ubuntu',
-                                              apt_source_deb: 'fluent-apt-source/fluent-apt-source_2025.1.8-1_all.deb'
+                                              apt_source_deb: 'fluent-apt-source/fluent-apt-source_2025.8.29-1_all.deb'
                                             })
     debian_lts_template = debian_template.merge({
-                                                  apt_source_deb: 'fluent-lts-apt-source/fluent-lts-apt-source_2025.1.8-1_all.deb',
+                                                  apt_source_deb: 'fluent-lts-apt-source/fluent-lts-apt-source_2025.8.29-1_all.deb',
                                                   lts: true
                                                 })
     ubuntu_lts_template = ubuntu_template.merge({
-                                                  apt_source_deb: 'fluent-lts-apt-source/fluent-lts-apt-source_2025.1.8-1_all.deb',
+                                                  apt_source_deb: 'fluent-lts-apt-source/fluent-lts-apt-source_2025.8.29-1_all.deb',
                                                   lts: true
                                                 })
     metadata.merge!({
