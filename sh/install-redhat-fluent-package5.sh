@@ -8,8 +8,7 @@ echo "You will be prompted for your password by sudo."
 sudo -k
 
 # run inside sudo
-sudo sh <<SCRIPT
-
+sudo sh <<'SCRIPT'
   # add GPG key
   rpm --import https://fluentd.cdn.cncf.io/GPG-KEY-td-agent
   rpm --import https://fluentd.cdn.cncf.io/GPG-KEY-fluent-package

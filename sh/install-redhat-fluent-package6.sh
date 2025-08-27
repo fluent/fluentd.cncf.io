@@ -9,7 +9,6 @@ sudo -k
 
 # run inside sudo
 sudo sh <<'SCRIPT'
-set -x
   # add fluent-release to access repository
   distribution=$(cat /etc/system-release-cpe | awk '{print substr($1, index($1, "o"))}' | cut -d: -f2)
   version=$(cat /etc/system-release-cpe | awk '{print substr($1, index($1, "o"))}' | cut -d: -f4)
