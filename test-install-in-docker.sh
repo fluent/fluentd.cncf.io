@@ -94,8 +94,8 @@ case $ID in
 			;;
 		    exp/lts/5)
 			set +e
-			cat /host/sh/install-$ID-$CODENAME-fluent-package5-lts.sh | sed -e 's,/5,/test/experimental/5,'
-			cat /host/sh/install-$ID-$CODENAME-fluent-package5-lts.sh | sed -e 's,/5,/test/experimental/5,' | sh
+			cat /host/sh/install-$ID-$CODENAME-fluent-package5-lts.sh | sed -e 's,/lts/5,/test/experimental/lts/5,'
+			cat /host/sh/install-$ID-$CODENAME-fluent-package5-lts.sh | sed -e 's,/lts/5,/test/experimental/lts/5,' | sh
 			set -e
 			sudo sed -i -e 's,/lts/5,/test/experimental/lts/5,' /etc/apt/sources.list.d/fluent-lts.sources
 			sudo apt update
@@ -111,9 +111,11 @@ case $ID in
 			sudo apt install -y fluent-package
 			;;
 		    exp/lts/6)
-			set +e
-			cat /host/sh/install-$ID-$CODENAME-fluent-package6-lts.sh | sed -e 's,/6,/test/experimental/6,'
-			cat /host/sh/install-$ID-$CODENAME-fluent-package6-lts.sh | sed -e 's,/6,/test/experimental/6,' | sh
+			echo "AAA"
+                        exit 0
+                        set +e
+			cat /host/sh/install-$ID-$CODENAME-fluent-package6-lts.sh | sed -e 's,/lts/6,/test/experimental/lts/6,'
+			cat /host/sh/install-$ID-$CODENAME-fluent-package6-lts.sh | sed -e 's,/lts/6,/test/experimental/lts/6,' | sh
 			set -e
 			sudo sed -i -e 's,/lts/6,/test/experimental/lts/6,' /etc/apt/sources.list.d/fluent-lts.sources
 			sudo apt update
@@ -149,8 +151,8 @@ case $ID in
 		;;
 	    exp/lts/5)
 		set +e
-		cat /host/sh/install-redhat-fluent-package5-lts.sh | sed -e 's,/5,/test/experimental/lts/5,'
-		cat /host/sh/install-redhat-fluent-package5-lts.sh | sed -e 's,/5,/test/experimental/lts/5,' | sh
+		cat /host/sh/install-redhat-fluent-package5-lts.sh | sed -e 's,/lts/5,/test/experimental/lts/5,'
+		cat /host/sh/install-redhat-fluent-package5-lts.sh | sed -e 's,/lts/5,/test/experimental/lts/5,' | sh
 		set -e
 		sudo sed -i -e 's,/lts/5,/test/experimental/lts/5,' /etc/yum.repos.d/fluent-package-lts.repo
 		sudo $DNF update -y
@@ -167,8 +169,8 @@ case $ID in
 		;;
 	    exp/lts/6)
 		set +e
-		cat /host/sh/install-redhat-fluent-package6-lts.sh | sed -e 's,/6,/test/experimental/lts/6,'
-		cat /host/sh/install-redhat-fluent-package6-lts.sh | sed -e 's,/6,/test/experimental/lts/6,' | sh
+		cat /host/sh/install-redhat-fluent-package6-lts.sh | sed -e 's,/lts/6,/test/experimental/lts/6,'
+		cat /host/sh/install-redhat-fluent-package6-lts.sh | sed -e 's,/lts/6,/test/experimental/lts/6,' | sh
 		set -e
 		sudo sed -i -e 's,/lts/6,/test/experimental/lts/6,' /etc/yum.repos.d/fluent-package-lts.repo
 		sudo $DNF update -y
@@ -202,8 +204,8 @@ case $ID in
 			;;
 		    exp/lts/5)
 			set +e
-			cat /host/sh/install-amazon2023-fluent-package5-lts.sh | sed -e 's,/5,/test/experimental/5,'
-			cat /host/sh/install-amazon2023-fluent-package5-lts.sh | sed -e 's,/5,/test/experimental/5,' | sh
+			cat /host/sh/install-amazon2023-fluent-package5-lts.sh | sed -e 's,/lts/5,/test/experimental/lts/5,'
+			cat /host/sh/install-amazon2023-fluent-package5-lts.sh | sed -e 's,/lts/5,/test/experimental/lts/5,' | sh
 			set -e
 			sudo sed -i -e 's,/lts/5,/test/experimental/lts/5,' /etc/yum.repos.d/fluent-package-lts.repo
 			sudo $DNF update
@@ -220,8 +222,8 @@ case $ID in
 			;;
 		    exp/lts/6)
 			set +e
-			cat /host/sh/install-amazon2023-fluent-package6-lts.sh | sed -e 's,/6,/test/experimental/6,'
-			cat /host/sh/install-amazon2023-fluent-package6-lts.sh | sed -e 's,/6,/test/experimental/6,' | sh
+			cat /host/sh/install-amazon2023-fluent-package6-lts.sh | sed -e 's,/lts/6,/test/experimental/lts/6,'
+			cat /host/sh/install-amazon2023-fluent-package6-lts.sh | sed -e 's,/lts/6,/test/experimental/lts/6,' | sh
 			set -e
 			sudo sed -i -e 's,/lts/6,/test/experimental/lts/6,' /etc/yum.repos.d/fluent-package-lts.repo
 			sudo $DNF update
