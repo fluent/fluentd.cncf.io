@@ -111,9 +111,7 @@ case $ID in
 			sudo apt install -y fluent-package
 			;;
 		    exp/lts/6)
-			echo "AAA"
-                        exit 0
-                        set +e
+			set +e
 			cat /host/sh/install-$ID-$CODENAME-fluent-package6-lts.sh | sed -e 's,/lts/6,/test/experimental/lts/6,'
 			cat /host/sh/install-$ID-$CODENAME-fluent-package6-lts.sh | sed -e 's,/lts/6,/test/experimental/lts/6,' | sh
 			set -e
