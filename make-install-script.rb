@@ -205,7 +205,7 @@ class FluentInstallScript
                       install_ubuntu_noble_fluent_package6_lts: ubuntu_lts_template.merge({version: 'noble'}),
                       install_ubuntu_jammy_fluent_package6_lts: ubuntu_lts_template.merge({version: 'jammy'}),
                       install_debian_bookworm_fluent_package6_lts: debian_lts_template.merge({version: 'bookworm'}),
-                      install_debian_trixie_fluent_package6_lts: debian_template.merge({version: 'trixie'}),
+                      install_debian_trixie_fluent_package6_lts: debian_lts_template.merge({version: 'trixie'}),
                     })
   end
 
