@@ -1,13 +1,23 @@
 # Introduction
 
-This directory is created to archive original installation scripts
-which are hosted on toolbelt.treasuredata.com.
+This directory was deployed to serve installation scripts
+on https://fluentd.cdn.cncf.io/sh 
 
-These installation script was dynamically generated on
+Previously, these installation script was dynamically generated on
 https://toolbelt.treasuredata.com and source code was hosted on
 TreasureData's private repository.
 
-It rely on deploying commercial cloud service and if we lost access to
-that private repository, can't manage them anymore. As a workaround,
-support to generate similar install script and upload it as static
-file.
+Now Fluent Package was hosted on https://fluentd.cdn.cncf.io, but
+still packages were mirrored on https://packages.treasuredata.com too.
+
+Once it can be operated stably on cncf.io, it will be unified to 
+ https://fluentd.cdn.cncf.io.
+
+# Special Thanks
+
+Even though since Treasure Agent - td-agent was re-blanded to
+Fluent Package, TreasureData has been provided enormous server resources
+for hosting fluent-package on https://packages.treasuredata.com.
+
+This is remarkable contributions for Fluentd Project and related
+community, Thanks!
