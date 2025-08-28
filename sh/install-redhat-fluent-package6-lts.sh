@@ -14,7 +14,7 @@ sudo sh <<'SCRIPT'
   version=$(cat /etc/system-release-cpe | awk '{print substr($1, index($1, "o"))}' | cut -d: -f4)
   arch=$(rpm --eval %{_arch})
   curl --silent -o fluent-release.rpm https://fluentd.cdn.cncf.io/lts/6/redhat/${version}/${arch}/fluent-lts-release-2025.8.29-1.el${version}.noarch.rpm
-  yum install ./fluent-release.rpm
+  yum install -y ./fluent-release.rpm
   rm -f ./fluent-release.rpm
 
   # update your sources
