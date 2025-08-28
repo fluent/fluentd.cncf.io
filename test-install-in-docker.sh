@@ -155,7 +155,8 @@ case $ID in
 			;;
 		    exp/6)
 			set +e
-			cat /host/sh/install-amazon2023-fluent-package6.sh | sh
+			cat /host/sh/install-amazon2023-fluent-package6.sh
+			cat /host/sh/install-amazon2023-fluent-package6.sh | sed -e 's,/6,/test/experimental/6,' | sh
 			set -e
 			sudo sed -i -e 's,/6,/test/experimental/6,' /etc/yum.repos.d/fluent-package.repo
 			sudo $DNF update
@@ -163,7 +164,8 @@ case $ID in
 			;;
 		    exp/lts/6)
 			set +e
-			cat /host/sh/install-amazon2023-fluent-package6-lts.sh | sh
+			cat /host/sh/install-amazon2023-fluent-package6-lts.sh
+			cat /host/sh/install-amazon2023-fluent-package6-lts.sh | sed -e 's,/6,/test/experimental/6,' | sh
 			set -e
 			sudo sed -i -e 's,/lts/6,/test/experimental/lts/6,' /etc/yum.repos.d/fluent-package-lts.repo
 			sudo $DNF update
