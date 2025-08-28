@@ -76,6 +76,9 @@ case $ID in
 	case $CODENAME in
 	    bookworm|trixie|jammy|noble)
 		setup_apt_user
+                export DEBIAN_FRONTEND=noninteractive
+                echo -e 'Dpkg::Options {\n"--force-confnew";\n}' | tee /etc/apt/apt.conf.d/90force-confnew
+                cat /etc/apt/apt.conf.d/90force-confnew
 		case $REPO in
 		    6)
 			cat /host/sh/install-$ID-$CODENAME-fluent-package6.sh | sh
