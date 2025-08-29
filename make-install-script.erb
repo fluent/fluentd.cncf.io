@@ -9,7 +9,11 @@ echo "You will be prompted for your password by sudo."
 sudo -k
 
 # run inside sudo
+<% if install_info[:channel_version] >= 6 %>
 sudo sh <<'SCRIPT'
+<% else %>
+sudo sh <<SCRIPT
+<% end %>
 <% if install_info[:channel_version] >= 6 %>
   # add fluent-release to access repository
   distribution=$(cat /etc/system-release-cpe | awk '{print substr($1, index($1, "o"))}' | cut -d: -f2)
