@@ -21,8 +21,16 @@ sudo sh <<SCRIPT
   arch=$(rpm --eval %{_arch})
 <% if install_info[:lts] %>
   curl --silent -o fluent-release.rpm <%= install_info[:base_url] %>/lts/<%= install_info[:channel_version]%>/redhat/${version}/${arch}/fluent-lts-release-<%= install_info[:fluent_release_version] %>.el${version}.noarch.rpm
+  if ! rpm -qf /etc/yum.repos.d/fluent-package-lts.repo; then
+    echo "Backup unmanaged .repo to fluent-package-lts.repo.rpmsave"
+    mv /etc/yum.repos.d/fluent-package-lts.repo /etc/yum.repos.d/fluent-package-lts.repo.rpmsave
+  fi
 <% else %>
   curl --silent -o fluent-release.rpm <%= install_info[:base_url] %>/<%= install_info[:channel_version]%>/redhat/${version}/${arch}/fluent-release-<%= install_info[:fluent_release_version] %>.el${version}.noarch.rpm
+  if ! rpm -qf /etc/yum.repos.d/fluent-package.repo; then
+    echo "Backup unmanaged .repo to fluent-package.repo.rpmsave"
+    mv /etc/yum.repos.d/fluent-package.repo /etc/yum.repos.d/fluent-package.repo.rpmsave
+  fi
 <% end %>
   yum install -y ./fluent-release.rpm
   rm -f ./fluent-release.rpm
