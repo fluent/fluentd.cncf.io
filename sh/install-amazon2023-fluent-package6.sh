@@ -27,7 +27,11 @@ sudo sh <<'SCRIPT'
   yum check-update
 
   # install the toolbelt
-  yes | yum install -y fluent-package
+  if rpm -q fluent-package; then
+    yum update -y fluent-package
+  else
+    yum install -y fluent-package
+  fi
 
 SCRIPT
 

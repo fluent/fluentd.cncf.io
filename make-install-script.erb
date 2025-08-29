@@ -148,7 +148,11 @@ EOF
   yum check-update
 
   # install the toolbelt
-  yes | yum install -y <%= install_info[:package_name] %>
+  if rpm -q <%= install_info[:package_name] %>; then
+    yum update -y <%= install_info[:package_name] %>
+  else
+    yum install -y <%= install_info[:package_name] %>
+  fi
 
 SCRIPT
 
