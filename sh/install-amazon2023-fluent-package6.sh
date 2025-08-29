@@ -14,9 +14,11 @@ sudo sh <<'SCRIPT'
   version=$(cat /etc/system-release-cpe | awk '{print substr($1, index($1, "o"))}' | cut -d: -f4)
   arch=$(rpm --eval %{_arch})
   curl -o fluent-release.rpm https://fluentd.cdn.cncf.io/6/amazon/${version}/${arch}/fluent-release-2025.8.29-1.amzn${version}.noarch.rpm
-  if ! rpm -qf /etc/yum.repos.d/fluent-package.repo; then
-    echo "Backup unmanaged .repo to fluent-package.repo.rpmsave"
-    mv /etc/yum.repos.d/fluent-package.repo /etc/yum.repos.d/fluent-package.repo.rpmsave
+  if [ -e /etc/yum.repos.d/fluent-package.repo ]; then
+    if ! rpm -qf /etc/yum.repos.d/fluent-package.repo; then
+      echo "Backup unmanaged .repo to fluent-package.repo.rpmsave"
+      mv /etc/yum.repos.d/fluent-package.repo /etc/yum.repos.d/fluent-package.repo.rpmsave
+    fi
   fi
   yum install -y ./fluent-release.rpm
   rm -f ./fluent-release.rpm
