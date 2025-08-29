@@ -9,11 +9,7 @@ echo "You will be prompted for your password by sudo."
 sudo -k
 
 # run inside sudo
-<% if install_info[:channel_version] >= 6 %>
 sudo sh <<'SCRIPT'
-<% else %>
-sudo sh <<SCRIPT
-<% end %>
 <% if install_info[:channel_version] >= 6 %>
   # add fluent-release to access repository
   distribution=$(cat /etc/system-release-cpe | awk '{print substr($1, index($1, "o"))}' | cut -d: -f2)
@@ -50,9 +46,9 @@ sudo sh <<SCRIPT
 [<%= install_info[:repo_label] %>]
 name=<%= install_info[:repo_name] %>
 <% if install_info[:channel_version] >= 2 %>
-baseurl=<%= install_info[:base_url] %>/<% if install_info[:lts] %>lts/<% end %><%= install_info[:channel_version] %>/redhat/\$releasever/\$basearch
+baseurl=<%= install_info[:base_url] %>/<% if install_info[:lts] %>lts/<% end %><%= install_info[:channel_version] %>/redhat/$releasever/$basearch
 <% else %>
-baseurl=<%= install_info[:base_url] %>/redhat/\$basearch
+baseurl=<%= install_info[:base_url] %>/redhat/$basearch
 <% end %>
 <% if install_info[:channel_version] >= 5 %>
 enabled=1
@@ -125,9 +121,9 @@ sudo sh <<'SCRIPT'
 [<%= install_info[:repo_label] %>]
 name=<%= install_info[:repo_name] %>
 <% if install_info[:channel_version] == 3 and install_info[:version] <= 2 %>
-baseurl=<%= install_info[:base_url] %>/<% if install_info[:lts] %>lts/<% end %><%= install_info[:channel_version] %>/<%= install_info[:distribution] %>/<%= install_info[:version] %>/\$releasever/\$basearch
+baseurl=<%= install_info[:base_url] %>/<% if install_info[:lts] %>lts/<% end %><%= install_info[:channel_version] %>/<%= install_info[:distribution] %>/<%= install_info[:version] %>/$releasever/$basearch
 <% else %>
-baseurl=<%= install_info[:base_url] %>/<% if install_info[:lts] %>lts/<% end %><%= install_info[:channel_version] %>/<%= install_info[:distribution] %>/<%= install_info[:version] %>/\$basearch
+baseurl=<%= install_info[:base_url] %>/<% if install_info[:lts] %>lts/<% end %><%= install_info[:channel_version] %>/<%= install_info[:distribution] %>/<%= install_info[:version] %>/$basearch
 <% end %>
 <% if install_info[:channel_version] >= 5 %>
 enabled=1

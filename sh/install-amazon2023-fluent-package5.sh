@@ -18,7 +18,7 @@ sudo sh <<'SCRIPT'
   cat >/etc/yum.repos.d/fluent-package.repo <<'EOF';
 [fluent-package]
 name=Fluentd Project
-baseurl=https://fluentd.cdn.cncf.io/5/amazon/2023/\$basearch
+baseurl=https://fluentd.cdn.cncf.io/5/amazon/2023/$basearch
 enabled=1
 gpgcheck=1
 gpgkey=https://fluentd.cdn.cncf.io/GPG-KEY-td-agent
