@@ -17,9 +17,19 @@ Once it can be operated stably on cncf.io, it will be unified to
 
 # Special Thanks
 
+## CNCF
+
+CNCF supports sub-domain and storage resources for providing
+https://fluentd.cdn.cncf.io.
+
+This is remarkable contributions for Fluentd Project and related
+community, Thanks!
+
+## Treasure Data, Inc
+
 Even though since Treasure Agent - td-agent was re-blanded to
 Fluent Package, TreasureData has been provided enormous server resources
 for hosting fluent-package on https://packages.treasuredata.com.
 
 This is remarkable contributions for Fluentd Project and related
-community, Thanks!
+community too, Thanks!
