@@ -200,7 +200,7 @@ case $ID in
 			cat /host/sh/install-amazon2023-fluent-package5.sh | sed -e 's,/5,/test/experimental/5,' | sh
 			set -e
 			sudo sed -i -e 's,/5,/test/experimental/5,' /etc/yum.repos.d/fluent-package.repo
-			sudo $DNF update
+			sudo $DNF update -y
 			sudo $DNF install -y fluent-package
 			;;
 		    exp/lts/5)
@@ -209,7 +209,7 @@ case $ID in
 			cat /host/sh/install-amazon2023-fluent-package5-lts.sh | sed -e 's,/lts/5,/test/experimental/lts/5,' | sh
 			set -e
 			sudo sed -i -e 's,/lts/5,/test/experimental/lts/5,' /etc/yum.repos.d/fluent-package-lts.repo
-			sudo $DNF update
+			sudo $DNF update -y
 			sudo $DNF install -y fluent-package
 			;;
 		    exp/6)
@@ -218,7 +218,7 @@ case $ID in
 			cat /host/sh/install-amazon2023-fluent-package6.sh | sed -e 's,/6,/test/experimental/6,' | sh
 			set -e
 			sudo sed -i -e 's,/6,/test/experimental/6,' /etc/yum.repos.d/fluent-package.repo
-			sudo $DNF update
+			sudo $DNF update -y
 			sudo $DNF install -y fluent-package
 			;;
 		    exp/lts/6)
@@ -227,7 +227,7 @@ case $ID in
 			cat /host/sh/install-amazon2023-fluent-package6-lts.sh | sed -e 's,/lts/6,/test/experimental/lts/6,' | sh
 			set -e
 			sudo sed -i -e 's,/lts/6,/test/experimental/lts/6,' /etc/yum.repos.d/fluent-package-lts.repo
-			sudo $DNF update
+			sudo $DNF update -y
 			sudo $DNF install -y fluent-package
 			;;
 		esac
