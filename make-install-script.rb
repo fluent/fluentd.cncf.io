@@ -13,13 +13,13 @@ end
 # script which was hosted on https://toolbelt.treasuredata.com/ previously.
 #
 # Use case 1: backup install scripts from https://toolbelt.treasuredata.com.
-# $ ruby make-install-script.rb --debug --channel 1,2,2.5,3,4,5,6 --backup
+# $ ruby make-install-script.rb --debug --channel 1,2,2.5,3,4,5,6 --backup .
 #
 # Use case 2: generate install scripts for packages.treasuredata.com.
-# $ ruby make-install-script.rb --debug --site https://packages.treasuredata.com --channel 5 --verify PATH_TO_REPOSITORY
+# $ ruby make-install-script.rb --debug --site https://packages.treasuredata.com --channel 5 --verify PATH_TO_REPOSITORY .
 #
 # Use case 3: generate install scripts for fluentd.cdn.cncf.io.
-# $ ruby make-install-script.rb --debug --channel 5 --verify PATH_TO_REPOSITORY
+# $ ruby make-install-script.rb --debug --channel 5 --verify PATH_TO_REPOSITORY .
 #
 
 options = {
@@ -30,6 +30,9 @@ options = {
 }
 
 opt = OptionParser.new
+opt.banner = <<~BANNER
+  Usage: ruby make-install-script.rb [options] top-dir
+BANNER
 opt.on("-a", "--archive", "Enable archived installed script to verify with") { |v| options[:archive] = true }
 opt.on("-b", "--backup", "Backup original install script (e.g. https://toolbelt.treasuredata.com)") { |v| options[:backup] = true }
 opt.on("-c", "--channel TARGET_CHANNEL", Array, "Specify channel with comma separated (e.g. --channel 4,5)") { |v| options[:channel] = v }
