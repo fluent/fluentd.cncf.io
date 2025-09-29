@@ -13,7 +13,7 @@ sudo sh <<'SCRIPT'
   distribution=$(cat /etc/system-release-cpe | awk '{print substr($1, index($1, "o"))}' | cut -d: -f2)
   version=$(cat /etc/system-release-cpe | awk '{print substr($1, index($1, "o"))}' | cut -d: -f4)
   arch=$(rpm --eval %{_arch})
-  curl --silent -o fluent-release.rpm https://fluentd.cdn.cncf.io/6/redhat/${version}/${arch}/fluent-release-2025.8.29-1.el${version}.noarch.rpm
+  curl --silent -o fluent-release.rpm https://fluentd.cdn.cncf.io/6/redhat/${version}/${arch}/fluent-release-2025.9.29-1.el${version}.noarch.rpm
   if [ -e /etc/yum.repos.d/fluent-package.repo ]; then
     if ! rpm -qf /etc/yum.repos.d/fluent-package.repo; then
       echo "Backup unmanaged .repo to fluent-package.repo.rpmsave"
