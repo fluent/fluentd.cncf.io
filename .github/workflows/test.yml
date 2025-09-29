@@ -1,0 +1,102 @@
+name: Installation Test Suite
+on:
+  push:
+    branches:
+      - r2
+  pull_request:
+  workflow_dispatch:
+concurrency:
+  group: ${{ github.head_ref || github.sha }}-${{ github.workflow }}
+  cancel-in-progress: true
+jobs:
+  define-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+      label: ${{ steps.set-matrix.outputs.label }}
+      v6: ${{ steps.set-matrix.outputs.v6 }}
+      v6lts: ${{ steps.set-matrix.outputs.v6lts }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4'
+      - id: set-matrix
+        # See https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/evaluate-expressions-in-workflows-and-actions#example-returning-a-json-object
+        run: |
+          echo "matrix=$(cat test.matrix.json | jq --compact-output)" >> $GITHUB_OUTPUT
+          echo "label=$(cat test.matrix.json | jq '[.include[].label]' --compact-output)" >> $GITHUB_OUTPUT
+          git clone https://github.com/fluent/fluent-package-builder.git
+          pushd fluent-package-builder
+          echo "v6lts=[\"$(git tag | grep v6.0 | tail -n 1 | sed -e 's/v//')\"]" >> $GITHUB_OUTPUT
+          echo "v6=[\"$(git tag | grep v6 | tail -n 1 | sed -e 's/v//')\"]" >> $GITHUB_OUTPUT
+          popd
+        working-directory: .github/workflows/
+
+  v6_install_test:
+    name: Test ${{ matrix.label }} v6
+    needs: [define-matrix]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        label: ${{ fromJSON(needs.define-matrix.outputs.label) }}
+        include: ${{ fromJSON(needs.define-matrix.outputs.matrix).include }}
+        tag: ${{ fromJSON(needs.define-matrix.outputs.v6) }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Test ${{ matrix.label }} ${{ matrix.tag }} for v6
+        run: |
+          REPO_TARGETS=6 DEB_TARGETS=${{ matrix.deb }} RPM_TARGETS=${{ matrix.rpm }} ./test-verify-repo.sh ${{ matrix.tag }}
+
+  v6_lts_install_test:
+    name: Test ${{ matrix.label }} v6/lts
+    needs: [define-matrix]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        label: ${{ fromJSON(needs.define-matrix.outputs.label) }}
+        include: ${{ fromJSON(needs.define-matrix.outputs.matrix).include }}
+        tag: ${{ fromJSON(needs.define-matrix.outputs.v6lts) }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Test ${{ matrix.label }} ${{ matrix.tag }} for v6/lts
+        run: |
+          REPO_TARGETS=lts/6 DEB_TARGETS=${{ matrix.deb }} RPM_TARGETS=${{ matrix.rpm }} ./test-verify-repo.sh ${{ matrix.tag }}
+
+  v6_exp_install_test:
+    name: Test ${{ matrix.label }} v6/exp
+    needs: [define-matrix]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        label: ${{ fromJSON(needs.define-matrix.outputs.label) }}
+        include: ${{ fromJSON(needs.define-matrix.outputs.matrix).include }}
+        tag: ${{ fromJSON(needs.define-matrix.outputs.v6lts) }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Test ${{ matrix.label }} for v6/exp
+        run: |
+          REPO_TARGETS=6/exp DEB_TARGETS=${{ matrix.deb }} RPM_TARGETS=${{ matrix.rpm }} ./test-verify-repo.sh ${{ matrix.tag }}
+
+  v6_exp_lts_install_test:
+    name: Test ${{ matrix.label }} v6/exp/lts
+    needs: [define-matrix]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        label: ${{ fromJSON(needs.define-matrix.outputs.label) }}
+        include: ${{ fromJSON(needs.define-matrix.outputs.matrix).include }}
+        tag: ${{ fromJSON(needs.define-matrix.outputs.v6lts) }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Test ${{ matrix.label }} for v6/exp/lts
+        run: |
+          REPO_TARGETS=6/exp DEB_TARGETS=${{ matrix.deb }} RPM_TARGETS=${{ matrix.rpm }} ./test-verify-repo.sh ${{ matrix.tag }}
