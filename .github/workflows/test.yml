@@ -99,4 +99,4 @@ jobs:
       - uses: actions/checkout@v4
       - name: Run Test ${{ matrix.label }} for v6/exp/lts
         run: |
-          REPO_TARGETS=6/exp DEB_TARGETS=${{ matrix.deb }} RPM_TARGETS=${{ matrix.rpm }} ./test-verify-repo.sh ${{ matrix.tag }}
+          REPO_TARGETS=exp/lts/6 DEB_TARGETS=${{ matrix.deb }} RPM_TARGETS=${{ matrix.rpm }} ./test-verify-repo.sh ${{ matrix.tag }}
