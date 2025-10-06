@@ -66,7 +66,8 @@ echo "REPO_TARGETS: $REPO_TARGETS"
 # give a grace period to terminate (Ctrl+C)
 sleep 3
 RESULTS=""
+mkdir -p logs
 test_deb
 test_rpm
-grep "Failed to install" install-*.log
+grep "Failed to install" logs/install-*.log
 echo -e $RESULTS
