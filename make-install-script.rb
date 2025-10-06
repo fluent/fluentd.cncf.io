@@ -38,9 +38,8 @@ opt.on("-s", "--site URL", "Specify distribution site (e.g. https://fluentd.cdn.
 opt.on("-v", "--verify", "Enable verification mode") { options[:verify] = true }
 top_dir = opt.parse!(ARGV).first
 
-unless File.exist?(top_dir)
-  puts "#{top_dir} not found"
-  exit 1
+unless top_dir
+  top_dir = File.dirname(File.expand_path(__FILE__))
 end
 
 class FluentInstallScript
