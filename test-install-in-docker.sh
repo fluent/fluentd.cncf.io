@@ -74,7 +74,7 @@ case $ID in
 	export DEBIAN_FRONTEND=noninteractive
 	CODENAME=$(cat /etc/os-release | grep VERSION_CODENAME | cut -d'=' -f2)
 	case $CODENAME in
-	    bookworm|trixie|jammy|noble)
+	    bullseye|bookworm|trixie|focal|jammy|noble)
 		setup_apt_user
                 export DEBIAN_FRONTEND=noninteractive
                 echo -e 'Dpkg::Options {\n"--force-confnew";\n}' | tee /etc/apt/apt.conf.d/90force-confnew
@@ -82,6 +82,9 @@ case $ID in
 		case $REPO in
 		    6)
 			cat /host/sh/install-$ID-$CODENAME-fluent-package6.sh | sh
+			;;
+		    lts/5)
+			cat /host/sh/install-$ID-$CODENAME-fluent-package5-lts.sh | sh
 			;;
 		    lts/6)
 			cat /host/sh/install-$ID-$CODENAME-fluent-package6-lts.sh | sh
@@ -138,6 +141,9 @@ case $ID in
 	    6)
 		cat /host/sh/install-redhat-fluent-package6.sh | sh
 		;;
+	    lts/5)
+		cat /host/sh/install-redhat-fluent-package5-lts.sh | sh
+		;;
 	    lts/6)
 		cat /host/sh/install-redhat-fluent-package6-lts.sh | sh
 		;;
@@ -182,12 +188,16 @@ case $ID in
 	;;
     *amzn*)
 	VERSION_ID=$(cat /etc/os-release | grep VERSION_ID | cut -d'=' -f2)
-	case $VERSION_ID in
+        DNF=yum
+        case $VERSION_ID in
 	    *2023*)
 		setup_dnf_user
 		case $REPO in
 		    6)
 			cat /host/sh/install-amazon2023-fluent-package6.sh | sh
+			;;
+		    lts/5)
+			cat /host/sh/install-amazon2023-fluent-package5-lts.sh | sh
 			;;
 		    lts/6)
 			cat /host/sh/install-amazon2023-fluent-package6-lts.sh | sh
@@ -225,6 +235,14 @@ case $ID in
 			sudo sed -i -e 's,/lts/6,/test/experimental/lts/6,' /etc/yum.repos.d/fluent-package-lts.repo
 			sudo $DNF update -y
 			sudo $DNF install -y fluent-package
+			;;
+		esac
+		;;
+	    *2*)
+		setup_dnf_user
+		case $REPO in
+		    lts/5)
+			cat /host/sh/install-amazon2-fluent-package5-lts.sh | sh
 			;;
 		esac
 		;;

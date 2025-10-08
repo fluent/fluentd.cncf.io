@@ -50,16 +50,29 @@ fi
 
 VERSION=$1
 
-if [ -z "$DEB_TARGETS" ]; then
-    DEB_TARGETS="debian:bookworm debian:trixie ubuntu:jammy ubuntu:noble"
-fi
-if [ -z "$RPM_TARGETS" ]; then
-    RPM_TARGETS="rockylinux:8 almalinux:9 almalinux:10 amazonlinux:2023"
-fi
 if [ -z "$REPO_TARGETS" ]; then
     REPO_TARGETS="exp/6 exp/lts/6"
 fi
-
+if [ -z "$DEB_TARGETS" ]; then
+    case $REPO_TARGETS in
+	*6*)
+	    DEB_TARGETS="debian:bookworm debian:trixie ubuntu:jammy ubuntu:noble"
+	    ;;
+	*5*)
+	    DEB_TARGETS="debian:bullseye debian:bookworm ubuntu:jammy ubuntu:noble"
+	    ;;
+    esac
+fi
+if [ -z "$RPM_TARGETS" ]; then
+    case $REPO_TARGETS in
+	*6*)
+	    RPM_TARGETS="rockylinux:8 almalinux:9 almalinux:10 amazonlinux:2023"
+	    ;;
+	*5*)
+	    RPM_TARGETS="rockylinux:8 almalinux:9 amazonlinux:2 amazonlinux:2023"
+	    ;;
+    esac
+fi
 echo "DEB_TARGETS: $DEB_TARGETS"
 echo "RPM_TARGETS: $RPM_TARGETS"
 echo "REPO_TARGETS: $REPO_TARGETS"
