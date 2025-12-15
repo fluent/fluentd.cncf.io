@@ -35,7 +35,7 @@ function test_deb() {
 	for r in $REPO_TARGETS; do
 	    echo "TEST: on $d $r"
 	    LOG=logs/install-${d/:/-}-on-${r//\//-}.log
-	    docker run --rm -v $(pwd):/host $d /host/test-install-in-docker.sh $USER $r $VERSION 2>&1 | tee $LOG
+	    docker run --rm -v $(pwd):/host $DOCKER_CLI_EXTRA_OPTIONS $d /host/test-install-in-docker.sh $USER $r $VERSION 2>&1 | tee $LOG
 	    if [ ${PIPESTATUS[0]} -eq 0 ]; then
 		RESULTS="$RESULTS\nOK: $d $r"
 	    else
@@ -53,7 +53,7 @@ function test_rpm() {
 	for r in $REPO_TARGETS; do
 	    echo "TEST: on $d $r"
 	    LOG=logs/install-${d/:/-}-on-${r//\//-}.log
-	    docker run --rm -v $(pwd):/host $d /host/test-install-in-docker.sh $USER $r $VERSION 2>&1 | tee $LOG
+	    docker run --rm -v $(pwd):/host $DOCKER_CLI_EXTRA_OPTIONS $d /host/test-install-in-docker.sh $USER $r $VERSION 2>&1 | tee $LOG
 	    if [ ${PIPESTATUS[0]} -eq 0 ]; then
 		RESULTS="$RESULTS\nOK: $d $r"
 	    else
