@@ -244,6 +244,14 @@ case $ID in
 		    lts/5)
 			cat /host/sh/install-amazon2-fluent-package5-lts.sh | sh
 			;;
+		    exp/lts/5)
+			set +e
+			cat /host/sh/install-amazon2-fluent-package5-lts.sh | sed -e 's,/lts/5,/test/experimental/lts/5,'
+			cat /host/sh/install-amazon2-fluent-package5-lts.sh | sed -e 's,/lts/5,/test/experimental/lts/5,' | sh
+			set -e
+			sudo $DNF update -y
+			sudo $DNF install -y fluent-package
+			;;
 		esac
 		;;
 	esac
