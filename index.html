@@ -8,6 +8,10 @@
     <!-- https://github.com/Remix-Design/RemixIcon - Apache 2.0 license -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet"/>
     <title>Fluent Package - formerly known as Treasure Agent (td-agent)</title>
+    <style>
+      .eol { background-color: #f5f2f0; }
+      .danger { background-color: #f2dede; }
+    </style>
   </head>
 <body style="margin: 2em;">
 <!-- See https://raw.githubusercontent.com/fluent/fluentd-docs-gitbook/refs/heads/1.0/images/logo/Fluentd_icon.svg -->
@@ -90,9 +94,14 @@
   </footer>
 </article>
 
-<h3>Fluent Package 5.x</h3>
+<h3>Fluent Package 5.x <span class="label error">Unmaintained</span></h3>
 
-<article class="card">
+<div class="card danger">
+  <p>Fluent Package v5 had reached EOL in Dec, 2025</p>
+  <p>See <a href="https://www.fluentd.org/blog/schedule-for-fluent-package-5-eol">Drop schedule announcement about EOL of Fluent Package (fluent-package) 5</a></p>
+</div>
+
+<article class="card eol">
   <header>
     <h4>Fluent Package 5 <span class="label success">Long Term Support Version</span></h4>
   </header>
@@ -125,7 +134,7 @@
   </footer>
 </article>
 
-<article class="card">
+<article class="card eol">
   <header>
     <h4>Fluent Package 5 <span class="label">Normal Release Version</span></h4>
   </header>
@@ -168,97 +177,127 @@
   </header>
 </article>
 
-<h4>Treasure Agent 4 (<strong>Unmaintained, Old Stable with ruby 2.7 or 3.1, <a href="https://www.fluentd.org/blog/schedule-for-td-agent-4-eol">End of life in Dec 2023</a></strong>)</h4>
-<ul>
-  <li>deb
+<article class="card eol">
+  <header>
+    <h4>Treasure Agent 4 (<strong>Unmaintained, Old Stable with ruby 2.7 or 3.1, <a href="https://www.fluentd.org/blog/schedule-for-td-agent-4-eol">End of life in Dec 2023</a></strong>)</h4>
+  </header>
+  <footer>
     <ul>
-    <li><a href="https://docs.fluentd.org/installation/install-by-deb">How to install Treasure Agent using deb</a></li>
-    <li>Browse: <a href="https://td-agent-package-browser.herokuapp.com/4/ubuntu/">Ubuntu Apt Repository</a></li>
-    <li>Browse: <a href="https://td-agent-package-browser.herokuapp.com/4/debian/">Debian Apt Repository</a></li>
+      <li>deb
+        <ul>
+          <li><a href="https://docs.fluentd.org/installation/install-by-deb">How to install Treasure Agent using deb</a></li>
+          <li>Browse: <a href="https://td-agent-package-browser.herokuapp.com/4/ubuntu/">Ubuntu Apt Repository</a></li>
+          <li>Browse: <a href="https://td-agent-package-browser.herokuapp.com/4/debian/">Debian Apt Repository</a></li>
+        </ul>
+      <li>yum:
+        <ul>
+          <li><a href="https://docs.fluentd.org/installation/install-by-rpm">How to install Treasure Agent using rpm</a></li>
+          <li>Browse: <a href="https://td-agent-package-browser.herokuapp.com/4/redhat/">Redhat and CentOS Yum Repository</a></li>
+          <li>Browse: <a href="https://td-agent-package-browser.herokuapp.com/4/amazon/">Amazon Linux Yum Repository</a></li>
+        </ul>
+      </li>
+      <li>msi:
+        <ul>
+          <li><a href="https://docs.fluentd.org/installation/install-by-msi">How to install Treasure Agent using msi</a></li>
+          <li>Browse: <a href="https://td-agent-package-browser.herokuapp.com/4/windows/">Windows msi Repository</a></li>
+        </ul>
+      </li>
     </ul>
-  <li>yum:
-    <ul>
-    <li><a href="https://docs.fluentd.org/installation/install-by-rpm">How to install Treasure Agent using rpm</a></li>
-    <li>Browse: <a href="https://td-agent-package-browser.herokuapp.com/4/redhat/">Redhat and CentOS Yum Repository</a></li>
-    <li>Browse: <a href="https://td-agent-package-browser.herokuapp.com/4/amazon/">Amazon Linux Yum Repository</a></li>
-    </ul>
-  </li>
-  <li>msi:
-    <ul>
-    <li><a href="https://docs.fluentd.org/installation/install-by-msi">How to install Treasure Agent using msi</a></li>
-    <li>Browse: <a href="https://td-agent-package-browser.herokuapp.com/4/windows/">Windows msi Repository</a></li>
-    </ul>
-  </li>
-</ul>
+  </footer>
+</article>
 
-<h4>Treasure Agent 3 (<strong>Unmaintained, Old-Old Stable with ruby 2.4, <a href="https://www.fluentd.org/blog/schedule-for-td-agent-3-eol">End of life in Feb 2022</a></strong>)</h4>
-<ul>
-  <li>deb
+<article class="card eol">
+  <header>
+    <h4>Treasure Agent 3 (<strong>Unmaintained, Old-Old Stable with ruby 2.4, <a href="https://www.fluentd.org/blog/schedule-for-td-agent-3-eol">End of life in Feb 2022</a></strong>)</h4>
+  </header>
+  <footer>
     <ul>
-    <li><a href="https://docs.fluentd.org/articles/install-by-deb">How to install Treasure Agent using deb</a></li>
-    <li>Browse: <a href="https://td-agent-package-browser.herokuapp.com/3/ubuntu/">Ubuntu Apt Repository</a></li>
-    <li>Browse: <a href="https://td-agent-package-browser.herokuapp.com/3/debian/">Debian Apt Repository</a></li>
+      <li>deb
+        <ul>
+          <li><a href="https://docs.fluentd.org/articles/install-by-deb">How to install Treasure Agent using deb</a></li>
+          <li>Browse: <a href="https://td-agent-package-browser.herokuapp.com/3/ubuntu/">Ubuntu Apt Repository</a></li>
+          <li>Browse: <a href="https://td-agent-package-browser.herokuapp.com/3/debian/">Debian Apt Repository</a></li>
+        </ul>
+      <li>yum:
+        <ul>
+          <li><a href="https://docs.fluentd.org/articles/install-by-rpm">How to install Treasure Agent using rpm</a></li>
+          <li>Browse: <a href="https://td-agent-package-browser.herokuapp.com/3/redhat/">Redhat and CentOS Yum Repository</a></li>
+          <li>Browse: <a href="https://td-agent-package-browser.herokuapp.com/3/amazon/">Amazon Linux Yum Repository</a></li>
+        </ul>
+      </li>
+      <li>msi:
+        <ul>
+          <li><a href="https://docs.fluentd.org/articles/install-by-msi">How to install Treasure Agent using msi</a></li>
+          <li>Browse: <a href="https://td-agent-package-browser.herokuapp.com/3/windows/">Windows msi Repository</a></li>
+        </ul>
+      </li>
     </ul>
-  <li>yum:
-    <ul>
-    <li><a href="https://docs.fluentd.org/articles/install-by-rpm">How to install Treasure Agent using rpm</a></li>
-    <li>Browse: <a href="https://td-agent-package-browser.herokuapp.com/3/redhat/">Redhat and CentOS Yum Repository</a></li>
-    <li>Browse: <a href="https://td-agent-package-browser.herokuapp.com/3/amazon/">Amazon Linux Yum Repository</a></li>
-    </ul>
-  </li>
-  <li>msi:
-    <ul>
-    <li><a href="https://docs.fluentd.org/articles/install-by-msi">How to install Treasure Agent using msi</a></li>
-    <li>Browse: <a href="https://td-agent-package-browser.herokuapp.com/3/windows/">Windows msi Repository</a></li>
-    </ul>
-  </li>
-</ul>
+  </footer>
+</article>
 
-<h4>Treasure Agent 2.5 (<strong>Unmaintained, Old-Old-Old Stable with ruby 2.5</strong>)</h4>
-<ul>
-  <li>deb
+<article class="card eol">
+  <header>
+    <h4>Treasure Agent 2.5 (<strong>Unmaintained, Old-Old-Old Stable with ruby 2.5</strong>)</h4>
+  </header>
+  <footer>
     <ul>
-    <li><a href="https://docs.fluentd.org/v0.12/articles/install-by-deb">How to install Treasure Agent using deb</a></li>
-    <li>Browse: <a href="https://td-agent-package-browser.herokuapp.com/2.5/ubuntu/">Ubuntu Apt Repository</a></li>
+      <li>deb
+        <ul>
+          <li><a href="https://docs.fluentd.org/v0.12/articles/install-by-deb">How to install Treasure Agent using deb</a></li>
+          <li>Browse: <a href="https://td-agent-package-browser.herokuapp.com/2.5/ubuntu/">Ubuntu Apt Repository</a></li>
+        </ul>
+      <li>yum:
+        <ul>
+          <li><a href="https://docs.fluentd.org/v0.12/articles/install-by-rpm">How to install Treasure Agent using rpm</a></li>
+          <li>Browse: <a href="https://td-agent-package-browser.herokuapp.com/2.5/redhat/">Redhat and CentOS Yum Repository</a></li>
+        </ul>
+      </li>
     </ul>
-  <li>yum:
-    <ul>
-    <li><a href="https://docs.fluentd.org/v0.12/articles/install-by-rpm">How to install Treasure Agent using rpm</a></li>
-    <li>Browse: <a href="https://td-agent-package-browser.herokuapp.com/2.5/redhat/">Redhat and CentOS Yum Repository</a></li>
-    </ul>
-  </li>
-</ul>
+  </footer>
+</article>
 
-<h4>Treasure Agent 2 (<strong>Unmaintained, Old-Old-Old-Old Stable with ruby 2.1</strong>)</h4>
-<ul>
-  <li>deb
+<article class="card eol">
+  <header>
+    <h4>Treasure Agent 2 (<strong>Unmaintained, Old-Old-Old-Old Stable with ruby 2.1</strong>)</h4>
+  </header>
+  <footer>
     <ul>
-    <li><a href="https://docs.fluentd.org/v0.12/articles/install-by-deb">How to install Treasure Agent using deb</a></li>
-    <li>Browse: <a href="https://td-agent-package-browser.herokuapp.com/2/ubuntu/">Ubuntu Apt Repository</a></li>
-    <li>Browse: <a href="https://td-agent-package-browser.herokuapp.com/2/debian/">Debian Apt Repository</a></li>
+      <li>deb
+        <ul>
+          <li><a href="https://docs.fluentd.org/v0.12/articles/install-by-deb">How to install Treasure Agent using deb</a></li>
+          <li>Browse: <a href="https://td-agent-package-browser.herokuapp.com/2/ubuntu/">Ubuntu Apt Repository</a></li>
+          <li>Browse: <a href="https://td-agent-package-browser.herokuapp.com/2/debian/">Debian Apt Repository</a></li>
+        </ul>
+      <li>yum:
+        <ul>
+          <li><a href="https://docs.fluentd.org/v0.12/articles/install-by-rpm">How to install Treasure Agent using rpm</a></li>
+          <li>Browse: <a href="https://td-agent-package-browser.herokuapp.com/2/redhat/">Redhat and CentOS Yum Repository</a></li>
+        </ul>
+      </li>
     </ul>
-  <li>yum:
-    <ul>
-    <li><a href="https://docs.fluentd.org/v0.12/articles/install-by-rpm">How to install Treasure Agent using rpm</a></li>
-    <li>Browse: <a href="https://td-agent-package-browser.herokuapp.com/2/redhat/">Redhat and CentOS Yum Repository</a></li>
-    </ul>
-  </li>
-</ul>
+  </footer>
+</article>
 
-<h4>Treasure Agent 1 (<strong>Unmaintained</strong>)</h4>
-<ul>
-  <li>deb
+<article class="card eol">
+  <header>
+    <h4>Treasure Agent 1 (<strong>Unmaintained</strong>)</h4>
+  </header>
+  <footer>
     <ul>
-    <li><a href="https://docs.fluentd.org/v0.10/articles/install-by-deb-v1">How to install Treasure Agent v1 using deb</a></li>
-    <li>Browse: Ubuntu <a href="https://td-agent-package-browser.herokuapp.com/debian/">Lucid</a> and <a href="https://td-agent-package-browser.herokuapp.com/precise/">Precise</a> Apt Repository</a></li>
-    </ul>
-  <li>yum:
-    <ul>
-    <li><a href="https://docs.fluentd.org/v0.10/articles/install-by-rpm-v1">How to install Treasure Agent v1 using rpm</a></li>
-    <li>Browse: <a href="https://td-agent-package-browser.herokuapp.com/redhat/">Redhat and CentOS Yum Repository</a></li>
-    </ul>
-  </li>
-</ul>
+      <li>deb
+        <ul>
+          <li><a href="https://docs.fluentd.org/v0.10/articles/install-by-deb-v1">How to install Treasure Agent v1 using deb</a></li>
+          <li>Browse: Ubuntu <a href="https://td-agent-package-browser.herokuapp.com/debian/">Lucid</a> and <a href="https://td-agent-package-browser.herokuapp.com/precise/">Precise</a> Apt Repository</a></li>
+        </ul>
+      <li>yum:
+        <ul>
+          <li><a href="https://docs.fluentd.org/v0.10/articles/install-by-rpm-v1">How to install Treasure Agent v1 using rpm</a></li>
+          <li>Browse: <a href="https://td-agent-package-browser.herokuapp.com/redhat/">Redhat and CentOS Yum Repository</a></li>
+        </ul>
+      </li>
+     </ul>
+   </footer>
+</article>
 
 <hr>
 
