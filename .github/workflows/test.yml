@@ -17,7 +17,7 @@ jobs:
       v6: ${{ steps.set-matrix.outputs.v6 }}
       v6lts: ${{ steps.set-matrix.outputs.v6lts }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.4'
@@ -45,7 +45,7 @@ jobs:
         include: ${{ fromJSON(needs.define-matrix.outputs.matrix).include }}
         tag: ${{ fromJSON(needs.define-matrix.outputs.v6) }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Run Test ${{ matrix.label }} ${{ matrix.tag }} for v6
         run: |
           REPO_TARGETS=6 DEB_TARGETS=${{ matrix.deb }} RPM_TARGETS=${{ matrix.rpm }} ./test-verify-repo.sh ${{ matrix.tag }}
@@ -62,7 +62,7 @@ jobs:
         include: ${{ fromJSON(needs.define-matrix.outputs.matrix).include }}
         tag: ${{ fromJSON(needs.define-matrix.outputs.v6lts) }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Run Test ${{ matrix.label }} ${{ matrix.tag }} for v6/lts
         run: |
           REPO_TARGETS=lts/6 DEB_TARGETS=${{ matrix.deb }} RPM_TARGETS=${{ matrix.rpm }} ./test-verify-repo.sh ${{ matrix.tag }}
@@ -79,7 +79,7 @@ jobs:
         include: ${{ fromJSON(needs.define-matrix.outputs.matrix).include }}
         tag: ${{ fromJSON(needs.define-matrix.outputs.v6lts) }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Run Test ${{ matrix.label }} for v6/exp
         run: |
           REPO_TARGETS=exp/6 DEB_TARGETS=${{ matrix.deb }} RPM_TARGETS=${{ matrix.rpm }} ./test-verify-repo.sh ${{ matrix.tag }}
@@ -96,7 +96,7 @@ jobs:
         include: ${{ fromJSON(needs.define-matrix.outputs.matrix).include }}
         tag: ${{ fromJSON(needs.define-matrix.outputs.v6lts) }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Run Test ${{ matrix.label }} for v6/exp/lts
         run: |
           REPO_TARGETS=exp/lts/6 DEB_TARGETS=${{ matrix.deb }} RPM_TARGETS=${{ matrix.rpm }} ./test-verify-repo.sh ${{ matrix.tag }}
