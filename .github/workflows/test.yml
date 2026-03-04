@@ -17,8 +17,8 @@ jobs:
       v6: ${{ steps.set-matrix.outputs.v6 }}
       v6lts: ${{ steps.set-matrix.outputs.v6lts }}
     steps:
-      - uses: actions/checkout@v6
-      - uses: ruby/setup-ruby@v1
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: ruby/setup-ruby@09a7688d3b55cf0e976497ff046b70949eeaccfd # v1.288.0
         with:
           ruby-version: '3.4'
       - id: set-matrix
@@ -45,7 +45,7 @@ jobs:
         include: ${{ fromJSON(needs.define-matrix.outputs.matrix).include }}
         tag: ${{ fromJSON(needs.define-matrix.outputs.v6) }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Run Test ${{ matrix.label }} ${{ matrix.tag }} for v6
         run: |
           REPO_TARGETS=6 DEB_TARGETS=${{ matrix.deb }} RPM_TARGETS=${{ matrix.rpm }} ./test-verify-repo.sh ${{ matrix.tag }}
@@ -62,7 +62,7 @@ jobs:
         include: ${{ fromJSON(needs.define-matrix.outputs.matrix).include }}
         tag: ${{ fromJSON(needs.define-matrix.outputs.v6lts) }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Run Test ${{ matrix.label }} ${{ matrix.tag }} for v6/lts
         run: |
           REPO_TARGETS=lts/6 DEB_TARGETS=${{ matrix.deb }} RPM_TARGETS=${{ matrix.rpm }} ./test-verify-repo.sh ${{ matrix.tag }}
@@ -79,7 +79,7 @@ jobs:
         include: ${{ fromJSON(needs.define-matrix.outputs.matrix).include }}
         tag: ${{ fromJSON(needs.define-matrix.outputs.v6lts) }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Run Test ${{ matrix.label }} for v6/exp
         run: |
           REPO_TARGETS=exp/6 DEB_TARGETS=${{ matrix.deb }} RPM_TARGETS=${{ matrix.rpm }} ./test-verify-repo.sh ${{ matrix.tag }}
@@ -96,7 +96,7 @@ jobs:
         include: ${{ fromJSON(needs.define-matrix.outputs.matrix).include }}
         tag: ${{ fromJSON(needs.define-matrix.outputs.v6lts) }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Run Test ${{ matrix.label }} for v6/exp/lts
         run: |
           REPO_TARGETS=exp/lts/6 DEB_TARGETS=${{ matrix.deb }} RPM_TARGETS=${{ matrix.rpm }} ./test-verify-repo.sh ${{ matrix.tag }}
