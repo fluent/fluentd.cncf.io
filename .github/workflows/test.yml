@@ -2,7 +2,7 @@ name: Installation Test Suite
 on:
   push:
     branches:
-      - r2
+      - main
   pull_request:
   workflow_dispatch:
 concurrency:
