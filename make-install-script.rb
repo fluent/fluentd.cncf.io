@@ -185,11 +185,11 @@ class FluentInstallScript
                                               apt_source_deb: 'fluent-apt-source/fluent-apt-source_2025.9.29-1_all.deb'
                                             })
     debian_lts_template = debian_template.merge({
-                                                  apt_source_deb: 'fluent-lts-apt-source/fluent-lts-apt-source_2025.9.29-1_all.deb',
+                                                  apt_source_deb: 'fluent-lts-apt-source/fluent-lts-apt-source_2026.4.29-1_all.deb',
                                                   lts: true
                                                 })
     ubuntu_lts_template = ubuntu_template.merge({
-                                                  apt_source_deb: 'fluent-lts-apt-source/fluent-lts-apt-source_2025.9.29-1_all.deb',
+                                                  apt_source_deb: 'fluent-lts-apt-source/fluent-lts-apt-source_2026.4.29-1_all.deb',
                                                   lts: true
                                                 })
     metadata.merge!({
