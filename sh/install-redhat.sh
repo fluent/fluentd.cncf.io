@@ -11,15 +11,15 @@ sudo -k
 sudo sh <<SCRIPT
 
   # add GPG key
-  rpm --import https://packages.treasuredata.com/GPG-KEY-td-agent
+  rpm --import https://fluentd.cdn.cncf.io/GPG-KEY-td-agent
 
   # add treasure data repository to yum
   cat >/etc/yum.repos.d/td.repo <<'EOF';
 [treasuredata]
 name=TreasureData
-baseurl=http://packages.treasuredata.com/redhat/\$basearch
+baseurl=https://fluentd.cdn.cncf.io/redhat/\$basearch
 gpgcheck=1
-gpgkey=https://packages.treasuredata.com/GPG-KEY-td-agent-old-sha1
+gpgkey=https://fluentd.cdn.cncf.io/GPG-KEY-td-agent-old-sha1
 EOF
 
   # update your sources

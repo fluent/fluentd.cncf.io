@@ -1,0 +1,44 @@
+{
+    "include": [
+        {
+            "label": "Bookworm",
+            "deb": "debian:bookworm",
+            "rpm": "dummy"
+        },
+        {
+            "label": "Trixie",
+            "deb": "debian:trixie",
+            "rpm": "dummy"
+        },
+        {
+            "label": "Jammy",
+            "deb": "ubuntu:jammy",
+            "rpm": "dummy"
+        },
+        {
+            "label": "Noble",
+            "deb": "ubuntu:noble",
+            "rpm": "dummy"
+        },
+        {
+            "label": "AlmaLinux8",
+            "deb": "dummy",
+            "rpm": "almalinux:8"
+        },
+        {
+            "label": "AlmaLinux9",
+            "deb": "dummy",
+            "rpm": "almalinux:9"
+        },
+        {
+            "label": "AlmaLinux10",
+            "deb": "dummy",
+            "rpm": "almalinux:10"
+        },
+        {
+            "label": "AmazonLinux",
+            "deb": "dummy",
+            "rpm": "amazonlinux:2023"
+        }
+    ]
+}

@@ -11,9 +11,9 @@ sudo -k
 sudo sh <<SCRIPT
   
     # Deprecated
-    curl https://packages.treasuredata.com/GPG-KEY-td-agent | apt-key add -
+    curl https://fluentd.cdn.cncf.io/GPG-KEY-td-agent | apt-key add -
     # add treasure data repository to apt
-    echo "deb http://packages.treasuredata.com/4/ubuntu/xenial/ xenial contrib" > /etc/apt/sources.list.d/treasure-data.list
+    echo "deb https://fluentd.cdn.cncf.io/4/ubuntu/xenial/ xenial contrib" > /etc/apt/sources.list.d/treasure-data.list
   
   # update your sources
   apt update

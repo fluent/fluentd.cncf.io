@@ -8,21 +8,20 @@ echo "You will be prompted for your password by sudo."
 sudo -k
 
 # run inside sudo
-sudo sh <<SCRIPT
-
+sudo sh <<'SCRIPT'
   # add GPG key
-  rpm --import https://packages.treasuredata.com/GPG-KEY-td-agent
-  rpm --import https://packages.treasuredata.com/GPG-KEY-fluent-package
+  rpm --import https://fluentd.cdn.cncf.io/GPG-KEY-td-agent
+  rpm --import https://fluentd.cdn.cncf.io/GPG-KEY-fluent-package
 
   # add fluent-package repository to yum
   cat >/etc/yum.repos.d/fluent-package-lts.repo <<'EOF';
 [fluent-package-lts]
 name=Fluentd Project
-baseurl=https://packages.treasuredata.com/lts/5/redhat/\$releasever/\$basearch
+baseurl=https://fluentd.cdn.cncf.io/lts/5/redhat/$releasever/$basearch
 enabled=1
 gpgcheck=1
-gpgkey=https://packages.treasuredata.com/GPG-KEY-td-agent
-       https://packages.treasuredata.com/GPG-KEY-fluent-package
+gpgkey=https://fluentd.cdn.cncf.io/GPG-KEY-td-agent
+       https://fluentd.cdn.cncf.io/GPG-KEY-fluent-package
 EOF
 
   # update your sources

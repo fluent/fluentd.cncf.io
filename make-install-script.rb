@@ -13,7 +13,7 @@ end
 # script which was hosted on https://toolbelt.treasuredata.com/ previously.
 #
 # Use case 1: backup install scripts from https://toolbelt.treasuredata.com.
-# $ ruby make-install-script.rb --debug --channel 1,2,2.5,3,4,5,6 --backup PATH_TO_REPOSITORY
+# $ ruby make-install-script.rb --debug --channel 1,2,2.5,3,4,5,6 --backup
 #
 # Use case 2: generate install scripts for packages.treasuredata.com.
 # $ ruby make-install-script.rb --debug --site https://packages.treasuredata.com --channel 5 --verify PATH_TO_REPOSITORY
@@ -38,9 +38,8 @@ opt.on("-s", "--site URL", "Specify distribution site (e.g. https://fluentd.cdn.
 opt.on("-v", "--verify", "Enable verification mode") { options[:verify] = true }
 top_dir = opt.parse!(ARGV).first
 
-unless File.exist?(top_dir)
-  puts "#{top_dir} not found"
-  exit 1
+unless top_dir
+  top_dir = File.dirname(File.expand_path(__FILE__))
 end
 
 class FluentInstallScript
@@ -169,6 +168,7 @@ class FluentInstallScript
                                      repo_label: @package_name,
                                      repo_file: @repo_file,
                                      repo_name: 'Fluentd Project',
+                                     fluent_release_version: '2025.9.29-1'
                                    })
     rhel_lts_template = rhel_template.merge({
                                               repo_file: @lts_repo_file,
@@ -177,19 +177,19 @@ class FluentInstallScript
                                             })
     debian_template = template.merge({
                                        distribution: 'debian',
-                                       apt_source_deb: 'fluent-apt-source/fluent-apt-source_2025.7.29-1_all.deb',
+                                       apt_source_deb: 'fluent-apt-source/fluent-apt-source_2025.9.29-1_all.deb',
                                        apt: 'apt'
                                      })
     ubuntu_template = debian_template.merge({
                                               distribution: 'ubuntu',
-                                              apt_source_deb: 'fluent-apt-source/fluent-apt-source_2025.7.29-1_all.deb'
+                                              apt_source_deb: 'fluent-apt-source/fluent-apt-source_2025.9.29-1_all.deb'
                                             })
     debian_lts_template = debian_template.merge({
-                                                  apt_source_deb: 'fluent-lts-apt-source/fluent-lts-apt-source_2025.7.29-1_all.deb',
+                                                  apt_source_deb: 'fluent-lts-apt-source/fluent-lts-apt-source_2025.9.29-1_all.deb',
                                                   lts: true
                                                 })
     ubuntu_lts_template = ubuntu_template.merge({
-                                                  apt_source_deb: 'fluent-lts-apt-source/fluent-lts-apt-source_2025.7.29-1_all.deb',
+                                                  apt_source_deb: 'fluent-lts-apt-source/fluent-lts-apt-source_2025.9.29-1_all.deb',
                                                   lts: true
                                                 })
     metadata.merge!({
@@ -204,7 +204,7 @@ class FluentInstallScript
                       install_ubuntu_noble_fluent_package6_lts: ubuntu_lts_template.merge({version: 'noble'}),
                       install_ubuntu_jammy_fluent_package6_lts: ubuntu_lts_template.merge({version: 'jammy'}),
                       install_debian_bookworm_fluent_package6_lts: debian_lts_template.merge({version: 'bookworm'}),
-                      install_debian_trixie_fluent_package6_lts: debian_template.merge({version: 'trixie'}),
+                      install_debian_trixie_fluent_package6_lts: debian_lts_template.merge({version: 'trixie'}),
                     })
   end
 
@@ -222,6 +222,7 @@ class FluentInstallScript
                                      repo_label: @package_name,
                                      repo_file: @repo_file,
                                      repo_name: 'Fluentd Project',
+                                     fluent_release_version: '2025.8.29-1'
                                    })
     rhel_lts_template = rhel_template.merge({
                                               repo_file: @lts_repo_file,
@@ -230,19 +231,19 @@ class FluentInstallScript
                                             })
     debian_template = template.merge({
                                        distribution: 'debian',
-                                       apt_source_deb: 'fluent-apt-source/fluent-apt-source_2025.1.8-1_all.deb',
+                                       apt_source_deb: 'fluent-apt-source/fluent-apt-source_2025.8.29-1_all.deb',
                                        apt: 'apt'
                                      })
     ubuntu_template = debian_template.merge({
                                               distribution: 'ubuntu',
-                                              apt_source_deb: 'fluent-apt-source/fluent-apt-source_2025.1.8-1_all.deb'
+                                              apt_source_deb: 'fluent-apt-source/fluent-apt-source_2025.8.29-1_all.deb'
                                             })
     debian_lts_template = debian_template.merge({
-                                                  apt_source_deb: 'fluent-lts-apt-source/fluent-lts-apt-source_2025.1.8-1_all.deb',
+                                                  apt_source_deb: 'fluent-lts-apt-source/fluent-lts-apt-source_2025.8.29-1_all.deb',
                                                   lts: true
                                                 })
     ubuntu_lts_template = ubuntu_template.merge({
-                                                  apt_source_deb: 'fluent-lts-apt-source/fluent-lts-apt-source_2025.1.8-1_all.deb',
+                                                  apt_source_deb: 'fluent-lts-apt-source/fluent-lts-apt-source_2025.8.29-1_all.deb',
                                                   lts: true
                                                 })
     metadata.merge!({

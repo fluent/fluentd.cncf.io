@@ -9,10 +9,10 @@ sudo -k
 
 # run inside sudo
 sudo sh <<SCRIPT
-  curl https://packages.treasuredata.com/GPG-KEY-td-agent | apt-key add -
+  curl https://fluentd.cdn.cncf.io/GPG-KEY-td-agent | apt-key add -
 
   # add treasure data repository to apt
-  echo "deb http://packages.treasuredata.com/3/debian/stretch/ stretch contrib" > /etc/apt/sources.list.d/treasure-data.list
+  echo "deb https://fluentd.cdn.cncf.io/3/debian/stretch/ stretch contrib" > /etc/apt/sources.list.d/treasure-data.list
 
   # update your sources
   apt-get update

@@ -8,28 +8,30 @@ echo "You will be prompted for your password by sudo."
 sudo -k
 
 # run inside sudo
-sudo sh <<SCRIPT
+sudo sh <<'SCRIPT'
 
-  # add GPG key
-  rpm --import https://packages.treasuredata.com/GPG-KEY-td-agent
-  rpm --import https://packages.treasuredata.com/GPG-KEY-fluent-package
-
-  # add treasure data repository to yum
-  cat >/etc/yum.repos.d/fluent-package-lts.repo <<'EOF';
-[fluent-package-lts]
-name=Fluentd Project
-baseurl=https://packages.treasuredata.com/lts/6/amazon/2023/\$basearch
-enabled=1
-gpgcheck=1
-gpgkey=https://packages.treasuredata.com/GPG-KEY-td-agent
-       https://packages.treasuredata.com/GPG-KEY-fluent-package
-EOF
+  # add fluent-release to access repository
+  version=$(cat /etc/system-release-cpe | awk '{print substr($1, index($1, "o"))}' | cut -d: -f4 | cut -d. -f1)
+  arch=$(rpm --eval %{_arch})
+  curl -o fluent-release.rpm https://fluentd.cdn.cncf.io/lts/6/amazon/${version}/${arch}/fluent-lts-release-2025.9.29-1.amzn${version}.noarch.rpm
+  if [ -e /etc/yum.repos.d/fluent-package-lts.repo ]; then
+    if ! rpm -qf /etc/yum.repos.d/fluent-package-lts.repo; then
+      echo "Backup unmanaged .repo to fluent-package-lts.repo.rpmsave"
+      mv /etc/yum.repos.d/fluent-package-lts.repo /etc/yum.repos.d/fluent-package-lts.repo.rpmsave
+    fi
+  fi
+  yum install -y ./fluent-release.rpm
+  rm -f ./fluent-release.rpm
 
   # update your sources
   yum check-update
 
   # install the toolbelt
-  yes | yum install -y fluent-package
+  if rpm -q fluent-package; then
+    yum update -y fluent-package
+  else
+    yum install -y fluent-package
+  fi
 
 SCRIPT
 
