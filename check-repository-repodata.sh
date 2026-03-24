@@ -5,6 +5,9 @@
 #
 # check-repository-metadata.sh 6.0.0 ../fluent-package-release/lts/6
 #
+# Note: Requires dnf-plugins-core to be installed to use the download command
+#
+# dnf install dnf-plugins-core
 
 VERSION=$1
 REPOSITORY_DIR=$2
@@ -31,5 +34,14 @@ dnf --disableplugin=system_upgrade clean all
 for path in $(find $REPOSITORY_DIR -name 'repodata'); do
     relative_dir=${path%/*}
     echo $relative_dir
-    LANG=C dnf --disableplugin=system_upgrade --releasever=$VERSION --disablerepo="*" --repofrompath wip,$relative_dir --enablerepo wip download fluent-package
+    rpm_file=$(find "$relative_dir" -maxdepth 1 -name "fluent-package-${VERSION}*.rpm" | head -n 1)
+    if [ -z "$rpm_file" ]; then
+        echo "Warning: No RPM file found in $relative_dir"
+        continue
+    fi
+    target_arch=$(basename "$relative_dir")
+    base_name=$(basename "$rpm_file")
+    pkg_name="${base_name%.${target_arch}.rpm}"
+    echo "Package name: ${pkg_name}"
+    LANG=C dnf --disableplugin=system_upgrade --releasever=$VERSION --disablerepo="*" --repofrompath wip,$relative_dir --enablerepo wip download $pkg_name
 done
