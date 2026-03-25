@@ -33,7 +33,7 @@ while true; do
             shift 2
             ;;
         --repo_dir)
-            REPO_DIR="$2"
+            REPO_DIR="${2%/}"
             shift 2
             ;;
         --endpoint_url)
