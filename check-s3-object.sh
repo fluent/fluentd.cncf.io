@@ -121,7 +121,7 @@ for channel in $CHANNEL; do
         relative_dir=${relative_path%/*}
         mkdir -p $WORKING_DIR/$relative_dir
         rm -fr $WORKING_DIR/$relative_path
-        etag_curl=$(curl --silent -I https://fluentd.cdn.cncf.io/$relative_path | \grep etag | cut -d' ' -f2 | sed -e 's/"//g' | tr -d '\r\n')
+        etag_curl=$(curl --silent -I https://fluentd.cdn.cncf.io/$relative_path | \grep -i etag | cut -d' ' -f2 | sed -e 's/"//g' | tr -d '\r\n')
         response=$(aws s3api head-object --bucket $BUCKET --profile $PROFILE --endpoint-url $ENDPOINT_URL --key $relative_path)
         if [ $DEBUG -eq 1 ]; then
             echo "etag via curl: ${etag_curl}"
