@@ -159,7 +159,7 @@ for channel in $CHANNEL; do
             ERROR_COUNT=$((ERROR_COUNT + 1))
         fi
 
-        pop=$(curl --silent -I https://fluentd.cdn.cncf.io/$relative_path | \grep cf-ray | tr -d '\r\n')
+        pop=$(curl --silent -I https://fluentd.cdn.cncf.io/$relative_path | \grep -i cf-ray | tr -d '\r\n')
         echo -e "\e[35;40m[INFO]\e[0m PoP $pop"
     done
 done
