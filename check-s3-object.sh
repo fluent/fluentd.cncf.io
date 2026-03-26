@@ -148,7 +148,7 @@ for channel in $CHANNEL; do
             ERROR_COUNT=$((ERROR_COUNT + 1))
         fi
 
-        local_sha256=$(echo $(sha256sum $pkg | cut -d' ' -f1))
+        local_sha256=$(sha256sum $pkg | cut -d' ' -f1)
         r2_sha256=$(sha256sum $WORKING_DIR/$relative_path | cut -d' ' -f1)
         if [ "$local_sha256" = "$r2_sha256" ]; then
             echo -e "\e[32;40m[PASS]\e[0m checksum $local_sha256 $relative_path"
