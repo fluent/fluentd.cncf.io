@@ -102,7 +102,7 @@ mkdir -p $WORKING_DIR
 
 for channel in $CHANNEL; do
     echo "checking $channel"
-    for pkg in $(find $REPO_DIR/$channel -name "$PATTERN"); do
+    for pkg in $(find "$REPO_DIR/$channel" -name "$PATTERN"); do
         case $REPO_DIR in
             *test/experimental*)
                 relative_path="test/experimental/${pkg##*test/experimental/}"
@@ -119,8 +119,8 @@ for channel in $CHANNEL; do
                 ;;
         esac
         relative_dir=${relative_path%/*}
-        mkdir -p $WORKING_DIR/$relative_dir
-        rm -fr $WORKING_DIR/$relative_path
+        mkdir -p "$WORKING_DIR/$relative_dir"
+        rm -fr "$WORKING_DIR/$relative_path"
         etag_curl=$(curl --silent -I https://fluentd.cdn.cncf.io/$relative_path | \grep -i etag | cut -d' ' -f2 | sed -e 's/"//g' | tr -d '\r\n')
         response=$(aws s3api head-object --bucket $BUCKET --profile $PROFILE --endpoint-url $ENDPOINT_URL --key $relative_path)
         if [ $DEBUG -eq 1 ]; then
@@ -139,8 +139,8 @@ for channel in $CHANNEL; do
         fi
 
         
-        curl --silent -o $WORKING_DIR/$relative_path https://fluentd.cdn.cncf.io/$relative_path
-        r2_md5sum=$(md5sum $WORKING_DIR/$relative_path | cut -d' ' -f1)
+        curl --silent -o "$WORKING_DIR/$relative_path" https://fluentd.cdn.cncf.io/$relative_path
+        r2_md5sum=$(md5sum "$WORKING_DIR/$relative_path" | cut -d' ' -f1)
         if [ "$etag_api" = "$r2_md5sum" ]; then
             echo -e "\e[32;40m[PASS]\e[0m etag <$etag_api> equal to md5sum checksum, no multipart upload $relative_path"
         else
@@ -149,7 +149,7 @@ for channel in $CHANNEL; do
         fi
 
         local_sha256=$(sha256sum $pkg | cut -d' ' -f1)
-        r2_sha256=$(sha256sum $WORKING_DIR/$relative_path | cut -d' ' -f1)
+        r2_sha256=$(sha256sum "$WORKING_DIR/$relative_path" | cut -d' ' -f1)
         if [ "$local_sha256" = "$r2_sha256" ]; then
             echo -e "\e[32;40m[PASS]\e[0m checksum $local_sha256 $relative_path"
         else
