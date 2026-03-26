@@ -163,5 +163,5 @@ for channel in $CHANNEL; do
         echo -e "\e[35;40m[INFO]\e[0m PoP $pop"
     done
 done
-rm -rf $WORKING_DIR
+rm -rf "$WORKING_DIR"
 exit $ERROR_COUNT
