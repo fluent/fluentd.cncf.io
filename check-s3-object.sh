@@ -88,10 +88,12 @@ if [ -z "$PATTERN" ]; then
     exit 1
 fi
 
-if [ -z "$(command -v aws)" ]; then
-    echo -e "\e[31;40m[ERROR]\e[0m No aws command was detected, install aws-cli"
-    exit 1
-fi
+for cmd in aws numfmt jq curl md5sum sha256sum; do
+    if [ -z "$(command -v $cmd)" ]; then
+        echo -e "\e[31;40m[ERROR]\e[0m No $cmd command was detected. Please install it."
+        exit 1
+    fi
+done
 
 
 WORKING_DIR=$(mktemp -d)
