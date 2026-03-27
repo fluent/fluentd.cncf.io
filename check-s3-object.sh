@@ -106,6 +106,27 @@ echo "repo_dir: $REPO_DIR"
 export AWS_PAGER=""
 mkdir -p $WORKING_DIR
 
+multipart_chunksize=$(aws configure get $PROFILE.s3.multipart_chunksize)
+multipart_threshold=$(aws configure get $PROFILE.s3.multipart_threshold)
+if [ -z "$multipart_chunksize" -o -z "$multipart_threshold" ]; then
+    echo -e "\e[31;40m[ERROR]\e[0m s3.multipart_chunksize and s3.multipart_threshold must be set"
+    exit 1
+fi
+
+threshold_literal="50M"
+if [ $(echo $multipart_chunksize | sed 's/B$//' | numfmt --from=iec) -lt $(numfmt --from=iec $threshold_literal) ]; then
+    echo -e "\e[31;40m[ERROR]\e[0m s3.multipart_chunksize <$multipart_chunksize> must be greater than <$threshold_literal>"
+    exit 1
+else
+    echo -e "\e[32;40m[PASS]\e[0m s3.multipart_chunksize <$multipart_chunksize> is greater than <$threshold_literal>"
+fi
+if [ $(echo $multipart_threshold | sed 's/B$//' | numfmt --from=iec) -lt $(numfmt --from=iec $threshold_literal) ]; then
+    echo -e "\e[31;40m[ERROR]\e[0m s3.multipart_threshold <$multipart_threshold> must be greater than <$threshold_literal>"
+    exit 1
+else
+    echo -e "\e[32;40m[PASS]\e[0m s3.multipart_threshold <$multipart_threshold> is greater than <$threshold_literal>"
+fi
+
 for channel in $CHANNEL; do
     echo "checking $channel"
     for pkg in $(find "$REPO_DIR/$channel" -name "$PATTERN"); do
