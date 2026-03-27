@@ -185,22 +185,25 @@ class FluentInstallScript
                                               apt_source_deb: 'fluent-apt-source/fluent-apt-source_2025.9.29-1_all.deb'
                                             })
     debian_lts_template = debian_template.merge({
-                                                  apt_source_deb: 'fluent-lts-apt-source/fluent-lts-apt-source_2025.9.29-1_all.deb',
+                                                  apt_source_deb: 'fluent-lts-apt-source/fluent-lts-apt-source_2026.4.29-1_all.deb',
                                                   lts: true
                                                 })
     ubuntu_lts_template = ubuntu_template.merge({
-                                                  apt_source_deb: 'fluent-lts-apt-source/fluent-lts-apt-source_2025.9.29-1_all.deb',
+                                                  apt_source_deb: 'fluent-lts-apt-source/fluent-lts-apt-source_2026.4.29-1_all.deb',
                                                   lts: true
                                                 })
     metadata.merge!({
                       install_redhat_fluent_package6: rhel_template,
                       install_amazon2023_fluent_package6: rhel_template.merge({distribution: 'amazon', version: 2023}),
                       install_ubuntu_noble_fluent_package6: ubuntu_template.merge({version: 'noble'}),
+                      # TODO: pending for a while
+                      #install_ubuntu_resolute_fluent_package6: ubuntu_template.merge({version: 'resolute'}),
                       install_ubuntu_jammy_fluent_package6: ubuntu_template.merge({version: 'jammy'}),
                       install_debian_bookworm_fluent_package6: debian_template.merge({version: 'bookworm'}),
                       install_debian_trixie_fluent_package6: debian_template.merge({version: 'trixie'}),
                       install_redhat_fluent_package6_lts: rhel_lts_template,
                       install_amazon2023_fluent_package6_lts: rhel_lts_template.merge({distribution: 'amazon', version: 2023}),
+                      install_ubuntu_resolute_fluent_package6_lts: ubuntu_lts_template.merge({version: 'resolute'}),
                       install_ubuntu_noble_fluent_package6_lts: ubuntu_lts_template.merge({version: 'noble'}),
                       install_ubuntu_jammy_fluent_package6_lts: ubuntu_lts_template.merge({version: 'jammy'}),
                       install_debian_bookworm_fluent_package6_lts: debian_lts_template.merge({version: 'bookworm'}),
