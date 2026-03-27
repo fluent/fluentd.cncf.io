@@ -88,6 +88,12 @@ if [ -z "$PATTERN" ]; then
     exit 1
 fi
 
+if [ -z "$(command -v aws)" ]; then
+    echo -e "\e[31;40m[ERROR]\e[0m No aws command was detected, install aws-cli"
+    exit 1
+fi
+
+
 WORKING_DIR=$(mktemp -d)
 
 echo "channel: $CHANNEL"
