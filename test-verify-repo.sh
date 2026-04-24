@@ -76,7 +76,7 @@ fi
 if [ -z "$DEB_TARGETS" ]; then
     case $REPO_TARGETS in
 	*6*)
-	    DEB_TARGETS="debian:bookworm debian:trixie ubuntu:jammy ubuntu:noble"
+	    DEB_TARGETS="debian:bookworm debian:trixie ubuntu:jammy ubuntu:noble ubuntu:resolute"
 	    ;;
 	*5*)
 	    DEB_TARGETS="debian:bullseye debian:bookworm ubuntu:focal ubuntu:jammy ubuntu:noble"
