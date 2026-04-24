@@ -74,7 +74,7 @@ case $ID in
 	export DEBIAN_FRONTEND=noninteractive
 	CODENAME=$(cat /etc/os-release | grep VERSION_CODENAME | cut -d'=' -f2)
 	case $CODENAME in
-	    bullseye|bookworm|trixie|focal|jammy|noble)
+	    bullseye|bookworm|trixie|focal|jammy|noble|resolute)
 		setup_apt_user
                 export DEBIAN_FRONTEND=noninteractive
                 echo -e 'Dpkg::Options {\n"--force-confnew";\n}' | tee /etc/apt/apt.conf.d/90force-confnew
