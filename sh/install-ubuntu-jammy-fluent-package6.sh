@@ -8,7 +8,15 @@ echo "You will be prompted for your password by sudo."
 sudo -k
 
 # run inside sudo
+executed_distribution=$(cat /etc/os-release | grep "^ID=" | cut -d'=' -f2)
+executed_release=$(cat /etc/os-release | grep VERSION_CODENAME | cut -d'=' -f2)
 sudo sh <<SCRIPT
+  if [ ! "${executed_release}" = "jammy" ]; then
+    echo
+    echo "[ERROR] Executed wrong installation script for ubuntu jammy on ${executed_distribution} ${executed_release}"
+    echo
+    exit 1
+  fi
   # use apt-source package which contains keyring
   curl -o fluent-apt-source.deb https://fluentd.cdn.cncf.io/6/ubuntu/jammy/pool/contrib/f/fluent-apt-source/fluent-apt-source_2025.9.29-1_all.deb
   apt install -y ./fluent-apt-source.deb

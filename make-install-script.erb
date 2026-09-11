@@ -171,7 +171,15 @@ echo "You will be prompted for your password by sudo."
 sudo -k
 
 # run inside sudo
+executed_distribution=$(cat /etc/os-release | grep "^ID=" | cut -d'=' -f2)
+executed_release=$(cat /etc/os-release | grep VERSION_CODENAME | cut -d'=' -f2)
 sudo sh <<SCRIPT
+  if [ ! "${executed_release}" = "<%= install_info[:version] %>" ]; then
+    echo
+    echo "[ERROR] Executed wrong installation script for <%= install_info[:distribution] %> <%= install_info[:version] %> on ${executed_distribution} ${executed_release}"
+    echo
+    exit 1
+  fi
 <% if install_info[:channel_version] >= 5 %>
   # use apt-source package which contains keyring
   curl -o fluent-apt-source.deb <%= install_info[:base_url] %>/<% if install_info[:lts] %>lts/<% end %><%= install_info[:channel_version] %>/<%= install_info[:distribution] %>/<%= install_info[:version] %>/pool/contrib/f/<%= install_info[:apt_source_deb] %>

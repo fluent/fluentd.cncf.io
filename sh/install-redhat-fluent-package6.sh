@@ -8,7 +8,20 @@ echo "You will be prompted for your password by sudo."
 sudo -k
 
 # run inside sudo
+executed_distribution=$(cat /etc/system-release-cpe | cut -d: -f3)
+executed_release=$(cat /etc/system-release-cpe | cut -d: -f5)
+case ${executed_distribution} in
+  almalinux|rockylinux)
+    executed_distribution=redhat
+    ;;
+esac
 sudo sh <<'SCRIPT'
+  if [ ! "${executed_release}" = "" ]; then
+    echo
+    echo "[ERROR] Executed wrong installation script for redhat  on ${executed_distribution} ${executed_release}"
+    echo
+    exit 1
+  fi
   # add fluent-release to access repository
   distribution=$(cat /etc/system-release-cpe | awk '{print substr($1, index($1, "o"))}' | cut -d: -f2)
   version=$(cat /etc/system-release-cpe | awk '{print substr($1, index($1, "o"))}' | cut -d: -f4 | cut -d. -f1)
@@ -32,6 +45,12 @@ sudo sh <<'SCRIPT'
 SCRIPT
 
 # message
-echo ""
-echo "Installation completed. Happy Logging!"
-echo ""
+if [ $? -eq 0 ]; then
+  echo ""
+  echo "Installation completed. Happy Logging!"
+  echo ""
+else
+  echo ""
+  echo "Installation incompleted. Check above messages."
+  echo ""
+fi
