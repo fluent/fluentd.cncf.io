@@ -137,6 +137,7 @@ class FluentInstallScript
         file.puts(content)
         puts "Generated: #{install_script_path}"
       end
+      File.chmod(0755, install_script_path)
       if @options[:verify]
         previous_content = fetch_previous_install_script(relative_install_script(key))
         previous_script_path = previous_script_uri(relative_install_script(key))
