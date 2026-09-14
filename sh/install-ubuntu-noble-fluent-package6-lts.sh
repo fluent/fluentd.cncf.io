@@ -8,6 +8,14 @@ echo "You will be prompted for your password by sudo."
 sudo -k
 
 # run inside sudo
+executed_distribution=$(cat /etc/os-release | grep "^ID=" | cut -d'=' -f2)
+executed_release=$(cat /etc/os-release | grep VERSION_CODENAME | cut -d'=' -f2)
+if [ ! "${executed_release}" = "noble" ]; then
+  echo
+  echo "[ERROR] Executed wrong installation script for ubuntu noble on ${executed_distribution} ${executed_release}"
+  echo
+  exit 1
+fi
 sudo sh <<SCRIPT
   # use apt-source package which contains keyring
   curl -o fluent-apt-source.deb https://fluentd.cdn.cncf.io/lts/6/ubuntu/noble/pool/contrib/f/fluent-lts-apt-source/fluent-lts-apt-source_2026.4.29-1_all.deb
@@ -26,8 +34,10 @@ if [ $? -eq 0 ]; then
   echo ""
   echo "Installation completed. Happy Logging!"
   echo ""
+  exit 0
 else
   echo ""
   echo "Installation incompleted. Check above messages."
   echo ""
+  exit 1
 fi
