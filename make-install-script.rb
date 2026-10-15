@@ -23,7 +23,7 @@ end
 #
 
 options = {
-  site: "https://fluentd.cdn.cncf.io",
+  site: "https://packages.fluentd.org",
   channel: %w(4 5),
   verify: false,
   debug: false
@@ -169,7 +169,7 @@ class FluentInstallScript
                                      repo_label: @package_name,
                                      repo_file: @repo_file,
                                      repo_name: 'Fluentd Project',
-                                     fluent_release_version: '2025.9.29-1'
+                                     fluent_release_version: '2026.10.29-1'
                                    })
     rhel_lts_template = rhel_template.merge({
                                               repo_file: @lts_repo_file,
@@ -178,19 +178,19 @@ class FluentInstallScript
                                             })
     debian_template = template.merge({
                                        distribution: 'debian',
-                                       apt_source_deb: 'fluent-apt-source/fluent-apt-source_2025.9.29-1_all.deb',
+                                       apt_source_deb: 'fluent-apt-source/fluent-apt-source_2026.10.29-1_all.deb',
                                        apt: 'apt'
                                      })
     ubuntu_template = debian_template.merge({
                                               distribution: 'ubuntu',
-                                              apt_source_deb: 'fluent-apt-source/fluent-apt-source_2025.9.29-1_all.deb'
+                                              apt_source_deb: 'fluent-apt-source/fluent-apt-source_2026.10.29-1_all.deb'
                                             })
     debian_lts_template = debian_template.merge({
-                                                  apt_source_deb: 'fluent-lts-apt-source/fluent-lts-apt-source_2026.4.29-1_all.deb',
+                                                  apt_source_deb: 'fluent-lts-apt-source/fluent-lts-apt-source_2026.10.29-1_all.deb',
                                                   lts: true
                                                 })
     ubuntu_lts_template = ubuntu_template.merge({
-                                                  apt_source_deb: 'fluent-lts-apt-source/fluent-lts-apt-source_2026.4.29-1_all.deb',
+                                                  apt_source_deb: 'fluent-lts-apt-source/fluent-lts-apt-source_2026.10.29-1_all.deb',
                                                   lts: true
                                                 })
     metadata.merge!({
