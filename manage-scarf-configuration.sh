@@ -39,7 +39,7 @@ case $1 in
             package_name=$(echo $entry | cut -d',' -f2)
             info "Get package routes (File Packages): ${package_name}"
             curl --silent --header "Authorization: Bearer ${SCARF_API_TOKEN}" \
-                 "https://api.scarf.sh/v2/packages/fluentd/${package_id}/routes" > ${package_name}.${YYYYMMDD}.json
+                 "https://api.scarf.sh/v2/packages/fluentd/${package_id}/routes?per_page=30" > ${package_name}.${YYYYMMDD}.json
         done
         ;;
     deploy)
