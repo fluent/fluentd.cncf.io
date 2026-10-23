@@ -81,8 +81,7 @@ case $1 in
                                \"name\": \"${name}\", \
                                \"type\": \"file\", \
                                \"incoming_path\": \"${incoming}\", \
-                               \"outgoing_url\": \"${outgoing}\", \
-                               \"domain\": \"packages.fluentd.org\" \
+                               \"outgoing_url\": \"${outgoing}\" \
                         }" \
                         "https://api.scarf.sh/v2/packages/fluentd")
                 if [ "$response" = '{"code":"package-already-exists","message":"Package already exists."}' ]; then
