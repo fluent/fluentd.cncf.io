@@ -19,6 +19,11 @@ export default async (request, context) => {
   //url.protocol = "https";
   //url.port = 443;
 
+  if (url.pathname === "/") {
+    // Workaround for Object not found on fluentd.cdn.cncf.io
+    url.pathname = "/index.html";
+  }
+
   return new Response(null, {
     status: 302,
     headers: {
