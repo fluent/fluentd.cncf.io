@@ -12,6 +12,9 @@ export default async (request, context) => {
   } else {
     // IPv6 or unknown: bypass Scarf.
     url.hostname = "fluentd.cdn.cncf.io";
+    // When bypassing scarf.sh, remap filter
+    // is not applied, so manually replace it here.
+    url.pathname = url.pathname.replace(/-std\.sh$/, ".sh");
   }
   //url.protocol = "https";
   //url.port = 443;
