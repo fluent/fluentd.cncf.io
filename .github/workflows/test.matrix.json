@@ -21,6 +21,11 @@
             "rpm": "dummy"
         },
         {
+            "label": "Resolute",
+            "deb": "ubuntu:resolute",
+            "rpm": "dummy"
+        },
+        {
             "label": "AlmaLinux8",
             "deb": "dummy",
             "rpm": "almalinux:8"
